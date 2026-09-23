@@ -1,0 +1,172 @@
+{
+  "deterministic": true,
+  "firings": {
+    "mul_pow2_to_shl": 11,
+    "mul_three_to_shift_add": 1
+  },
+  "library": {
+    "candidates": 37,
+    "costs": {
+      "add_self_to_shl1": {
+        "match": 1,
+        "rewrite": 1
+      },
+      "add_split_or_and": {
+        "match": 1,
+        "rewrite": 3
+      },
+      "and_not_self_zero": {
+        "match": 2,
+        "rewrite": 1
+      },
+      "demorgan_not_and": {
+        "match": 2,
+        "rewrite": 3
+      },
+      "double_negation": {
+        "match": 2,
+        "rewrite": 1
+      },
+      "icmp_not_sgt_to_sle": {
+        "match": 2,
+        "rewrite": 1
+      },
+      "icmp_sgt_swap": {
+        "match": 1,
+        "rewrite": 1
+      },
+      "mul_neg_one_to_neg": {
+        "match": 3,
+        "rewrite": 1
+      },
+      "mul_pow2_to_shl": {
+        "match": 3,
+        "rewrite": 1
+      },
+      "mul_three_to_shift_add": {
+        "match": 3,
+        "rewrite": 2
+      },
+      "or_not_self_ones": {
+        "match": 2,
+        "rewrite": 1
+      },
+      "or_zero_identity": {
+        "match": 1,
+        "rewrite": 1
+      },
+      "sdiv_by_one": {
+        "match": 8,
+        "rewrite": 1
+      },
+      "select_same_arms": {
+        "match": 1,
+        "rewrite": 1
+      },
+      "shl_shl_combine": {
+        "match": 2,
+        "rewrite": 1
+      },
+      "srem_by_one": {
+        "match": 8,
+        "rewrite": 1
+      },
+      "sub_or_to_and": {
+        "match": 3,
+        "rewrite": 1
+      },
+      "sub_self_to_zero": {
+        "match": 1,
+        "rewrite": 1
+      },
+      "xor_and_to_or": {
+        "match": 3,
+        "rewrite": 1
+      },
+      "xor_self_to_zero": {
+        "match": 1,
+        "rewrite": 1
+      }
+    },
+    "held_back": [
+      "or_zero_identity",
+      "add_self_to_shl1",
+      "sub_self_to_zero",
+      "xor_self_to_zero",
+      "demorgan_not_and",
+      "add_split_or_and",
+      "select_same_arms",
+      "icmp_sgt_swap"
+    ],
+    "profitable": [
+      "mul_pow2_to_shl",
+      "mul_three_to_shift_add",
+      "mul_neg_one_to_neg",
+      "double_negation",
+      "and_not_self_zero",
+      "or_not_self_ones",
+      "sub_or_to_and",
+      "xor_and_to_or",
+      "shl_shl_combine",
+      "sdiv_by_one",
+      "srem_by_one",
+      "icmp_not_sgt_to_sle"
+    ],
+    "proven": 20
+  },
+  "never_fired": [
+    "mul_neg_one_to_neg",
+    "double_negation",
+    "and_not_self_zero",
+    "or_not_self_ones",
+    "sub_or_to_and",
+    "xor_and_to_or",
+    "shl_shl_combine",
+    "sdiv_by_one",
+    "srem_by_one",
+    "icmp_not_sgt_to_sle"
+  ],
+  "programs": [
+    {
+      "after": 94,
+      "before": 99,
+      "firings": 6,
+      "program": "bitmix.mc"
+    },
+    {
+      "after": 58,
+      "before": 58,
+      "firings": 0,
+      "program": "gcd.mc"
+    },
+    {
+      "after": 221,
+      "before": 225,
+      "firings": 4,
+      "program": "matmul.mc"
+    },
+    {
+      "after": 180,
+      "before": 181,
+      "firings": 1,
+      "program": "numeric.mc"
+    },
+    {
+      "after": 205,
+      "before": 209,
+      "firings": 0,
+      "program": "sort.mc"
+    },
+    {
+      "after": 260,
+      "before": 261,
+      "firings": 1,
+      "program": "stencil.mc"
+    }
+  ],
+  "total": {
+    "after": 1018,
+    "before": 1033,
+    "reduction": 0.01452081316553727
+  }
+}

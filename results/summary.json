@@ -1,0 +1,20 @@
+{
+  "generated_seconds": 17.8,
+  "headline": {
+    "LL(1) conflicts in the MiniC grammar": 0,
+    "benchmark programs compiled": 6,
+    "compilation is byte-identical across runs": true,
+    "counterexamples reproduced by the reference interpreter": "17/17",
+    "library rules that are cost-reducing": "12 of 20",
+    "median solve time": "1.7 ms",
+    "mutants detected": "76/80",
+    "proven": 20,
+    "proven rules wrongly refuted by testing": 0,
+    "refuted": 17,
+    "rules checked": 37,
+    "rules that ever matched the benchmark suite": "2 of 12",
+    "wrong rules caught by boundary-seeded testing (best budget)": "14 of 15",
+    "wrong rules caught by the solver": "15 of 15",
+    "wrong rules caught by uniform random testing (best budget)": "11 of 15"
+  }
+}

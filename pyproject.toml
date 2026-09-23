@@ -1,0 +1,19 @@
+[project]
+name = "proveit-c"
+version = "0.1.0"
+description = "A compiler in which the model proposes and a deterministic verifier decides"
+requires-python = ">=3.11"
+dependencies = [
+    "z3-solver==5.1.0",
+]
+
+[project.optional-dependencies]
+# Not yet used. The backend lands when IR generation reaches SSA form, and the
+# proposer lands with Module B; both are listed so the environment is pinned
+# before the code that needs it exists.
+backend = ["llvmlite==0.44.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q --strict-markers"

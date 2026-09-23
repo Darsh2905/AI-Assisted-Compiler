@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ProveIt-C — playground</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+  :root{
+    color-scheme: light dark;
+    --bg:#f2f5f6; --surface:#ffffff; --surface-2:#eaeff1;
+    --ink:#101d26; --muted:#566b78; --faint:#7d919c;
+    --rule:#d8e0e4; --rule-strong:#bcc9cf;
+    --accent:#0f6f68; --accent-soft:#d8ebe8;
+    --proven:#1a7a3e; --refuted:#b3261e; --unsettled:#9a6700;
+    --proven-bg:#e2f2e8; --refuted-bg:#fbe6e4; --unsettled-bg:#f8eed6;
+    --add:#1a7a3e; --add-bg:#e2f2e8; --del:#b3261e; --del-bg:#fbe6e4;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0c1216; --surface:#141d23; --surface-2:#1b262d;
+      --ink:#e4ecf0; --muted:#96aab6; --faint:#748a97;
+      --rule:#243139; --rule-strong:#33454f;
+      --accent:#37b3a6; --accent-soft:#12312f;
+      --proven:#5cc27e; --refuted:#f08279; --unsettled:#d9a83c;
+      --proven-bg:#122a1c; --refuted-bg:#2e1614; --unsettled-bg:#2c2312;
+      --add:#5cc27e; --add-bg:#122a1c; --del:#f08279; --del-bg:#2e1614;
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:400 14px/1.55 "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    display:flex; flex-direction:column;
+  }
+  h1,h2{font-family:"IBM Plex Serif", Georgia, serif; margin:0}
+  code,.mono,textarea,pre{font-family:"IBM Plex Mono", ui-monospace, Menlo, monospace}
+
+  header{
+    border-bottom:1px solid var(--rule); background:var(--surface);
+    padding:14px 20px; display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  }
+  header h1{font-size:1.25rem; font-weight:600}
+  header .tag{font-size:.78rem; color:var(--muted)}
+  header .spacer{flex:1}
+  .lib-badge{
+    font:500 .74rem/1 "IBM Plex Mono", monospace; padding:5px 10px; border-radius:999px;
+    background:var(--surface-2); border:1px solid var(--rule-strong); color:var(--muted);
+    white-space:nowrap;
+  }
+  .lib-badge b{color:var(--ink)}
+
+  main{flex:1; display:flex; min-height:0}
+  .pane-left{
+    width:42%; min-width:340px; display:flex; flex-direction:column;
+    border-right:1px solid var(--rule); background:var(--surface);
+  }
+  .pane-right{flex:1; display:flex; flex-direction:column; min-width:0}
+
+  .toolbar{
+    display:flex; gap:8px; align-items:center; padding:10px 14px;
+    border-bottom:1px solid var(--rule); flex-wrap:wrap;
+  }
+  select, button{
+    font:500 .82rem "IBM Plex Sans", sans-serif; padding:7px 11px; border-radius:7px;
+    border:1px solid var(--rule-strong); background:var(--surface); color:var(--ink);
+    cursor:pointer;
+  }
+  select:hover, button:hover{border-color:var(--accent)}
+  button.primary{
+    background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600;
+  }
+  button.primary:hover{filter:brightness(1.08)}
+  button:disabled{opacity:.5; cursor:default}
+  label.chk{display:flex; align-items:center; gap:6px; font-size:.82rem; color:var(--muted); cursor:pointer}
+  .toolbar .spacer{flex:1}
+  kbd{
+    font:500 .68rem "IBM Plex Mono",monospace; background:var(--surface-2);
+    border:1px solid var(--rule-strong); border-radius:4px; padding:1px 5px;
+  }
+
+  #source{
+    flex:1; resize:none; border:0; outline:0; padding:16px 18px;
+    background:var(--surface); color:var(--ink); font-size:.86rem; line-height:1.65;
+    tab-size:2;
+  }
+
+  .status-bar{
+    padding:8px 14px; border-top:1px solid var(--rule); font-size:.8rem;
+    color:var(--muted); display:flex; gap:10px; align-items:center; min-height:34px;
+  }
+  .status-bar.ok{color:var(--proven)}
+  .status-bar.err{color:var(--refuted)}
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--faint); flex:none}
+  .status-bar.ok .dot{background:var(--proven)}
+  .status-bar.err .dot{background:var(--refuted)}
+
+  .tabs{display:flex; gap:2px; padding:8px 10px 0; border-bottom:1px solid var(--rule); flex-wrap:wrap}
+  .tab{
+    padding:8px 13px; font:500 .82rem "IBM Plex Sans",sans-serif; color:var(--muted);
+    border:1px solid transparent; border-bottom:0; border-radius:7px 7px 0 0; cursor:pointer;
+    display:flex; align-items:center; gap:6px;
+  }
+  .tab:hover{color:var(--ink)}
+  .tab.active{color:var(--ink); background:var(--surface); border-color:var(--rule)}
+  .tab .n{
+    font:500 .68rem "IBM Plex Mono",monospace; background:var(--surface-2); color:var(--faint);
+    padding:1px 6px; border-radius:999px;
+  }
+  .tab.has-err .n{background:var(--refuted-bg); color:var(--refuted)}
+  .tab.has-ok .n{background:var(--proven-bg); color:var(--proven)}
+
+  .panel{flex:1; overflow:auto; background:var(--surface); padding:16px 20px; display:none}
+  .panel.active{display:block}
+  .panel pre{white-space:pre-wrap; word-break:break-word; font-size:.83rem; line-height:1.6; margin:0}
+  .empty{color:var(--faint); font-style:italic; padding:30px 4px}
+
+  table{border-collapse:collapse; width:100%; font-size:.83rem}
+  th,td{text-align:left; padding:7px 10px; border-bottom:1px solid var(--rule); vertical-align:top}
+  thead th{
+    font:500 .68rem "IBM Plex Mono",monospace; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--faint); background:var(--surface-2); white-space:nowrap;
+  }
+  td.num{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; white-space:nowrap}
+  td.name{font-family:"IBM Plex Mono",monospace; white-space:nowrap}
+
+  .verdict{
+    font:500 .68rem "IBM Plex Mono",monospace; padding:2px 7px; border-radius:5px;
+    display:inline-block; white-space:nowrap;
+  }
+  .v-proven{color:var(--proven); background:var(--proven-bg)}
+  .v-refuted{color:var(--refuted); background:var(--refuted-bg)}
+  .v-inconclusive, .v-vacuous{color:var(--unsettled); background:var(--unsettled-bg)}
+
+  .diag-card{
+    border-left:3px solid var(--refuted); background:var(--refuted-bg); border-radius:0 8px 8px 0;
+    padding:12px 14px; margin-bottom:12px;
+  }
+  .diag-card pre{margin:0; font-size:.8rem}
+  .diag-meta{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; font-size:.76rem; color:var(--muted)}
+  .diag-meta code{background:var(--surface); padding:2px 6px; border-radius:4px}
+
+  .diff-line{padding:0 8px; white-space:pre; font-size:.83rem}
+  .diff-add{background:var(--add-bg); color:var(--add)}
+  .diff-del{background:var(--del-bg); color:var(--del)}
+  .diff-hunk{color:var(--faint); font-style:italic}
+
+  .kv{display:flex; gap:22px; flex-wrap:wrap; margin-bottom:14px}
+  .kv .item .n{font:500 1.5rem/1 "IBM Plex Mono",monospace; font-variant-numeric:tabular-nums}
+  .kv .item .k{font-size:.76rem; color:var(--muted)}
+
+  .note-box{
+    border-left:3px solid var(--accent); background:var(--accent-soft); border-radius:0 8px 8px 0;
+    padding:10px 14px; font-size:.83rem; color:var(--muted); margin-bottom:14px;
+  }
+  .note-box b{color:var(--ink)}
+
+  footer{
+    border-top:1px solid var(--rule); padding:8px 20px; font-size:.75rem; color:var(--faint);
+    display:flex; gap:16px; flex-wrap:wrap; background:var(--surface);
+  }
+
+  @media (max-width:860px){
+    main{flex-direction:column}
+    .pane-left{width:auto; border-right:0; border-bottom:1px solid var(--rule); height:42vh}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ProveIt-C</h1>
+  <span class="tag">local playground &middot; real backend, real Z3</span>
+  <span class="spacer"></span>
+  <span class="lib-badge" id="libBadge">loading rule library&hellip;</span>
+</header>
+
+<main>
+  <section class="pane-left">
+    <div class="toolbar">
+      <select id="sampleSelect"><option value="">Sample programs&hellip;</option></select>
+      <span class="spacer"></span>
+      <label class="chk"><input type="checkbox" id="optimizeChk" checked> optimize (-O)</label>
+      <button class="primary" id="runBtn">Compile &nbsp;<kbd>&#8984;&crarr;</kbd></button>
+    </div>
+    <textarea id="source" spellcheck="false" placeholder="// paste MiniC source here"></textarea>
+    <div class="status-bar" id="statusBar"><span class="dot"></span><span>ready</span></div>
+  </section>
+
+  <section class="pane-right">
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-tab="tokens">Tokens <span class="n" id="cnt-tokens">&ndash;</span></div>
+      <div class="tab" data-tab="ast">AST</div>
+      <div class="tab" data-tab="diag">Diagnostics <span class="n" id="cnt-diag">&ndash;</span></div>
+      <div class="tab" data-tab="ir">IR</div>
+      <div class="tab" data-tab="opt">Optimized <span class="n" id="cnt-opt">&ndash;</span></div>
+      <div class="tab" data-tab="rules">Rules fired <span class="n" id="cnt-rules">&ndash;</span></div>
+      <div class="tab" data-tab="verifier">Verifier</div>
+    </div>
+
+    <div class="panel active" id="panel-tokens"><div class="empty">Compile a program to see its token stream.</div></div>
+    <div class="panel" id="panel-ast"><div class="empty">Compile a program to see its typed AST.</div></div>
+    <div class="panel" id="panel-diag"><div class="empty">No diagnostics yet.</div></div>
+    <div class="panel" id="panel-ir"><div class="empty">Compile a program to see generated IR.</div></div>
+    <div class="panel" id="panel-opt"><div class="empty">Compile a program to see the optimized IR and diff.</div></div>
+    <div class="panel" id="panel-rules"><div class="empty">Compile a program to see which proven rules fired.</div></div>
+    <div class="panel" id="panel-verifier"><div class="empty">Loading verifier results&hellip;</div></div>
+  </section>
+</main>
+
+<footer>
+  <span>Every panel is produced by the real <code>frontend/</code>, <code>ir/</code>, <code>passes/</code> and <code>verify/</code> modules &mdash; nothing here is a separate reimplementation.</span>
+  <span><code>python3 -m pytest</code> &middot; <code>./run_all.sh</code> &middot; <code>./demo/demo.sh</code></span>
+</footer>
+
+<script>
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+const esc = s => (s ?? '').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+function switchTab(name){
+  $$('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  $$('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+}
+$$('.tab').forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+
+function setBadge(id, n, kind){
+  const el = document.getElementById(id);
+  el.textContent = n;
+  el.parentElement.classList.remove('has-err', 'has-ok');
+  if (kind) el.parentElement.classList.add(kind);
+}
+
+function renderTokens(tokens){
+  if (!tokens || !tokens.length) return '<div class="empty">No tokens.</div>';
+  let rows = tokens.map(t =>
+    `<tr><td class="num">${t.line}:${t.col_start}-${t.col_end}</td>
+     <td class="name">${esc(t.kind)}</td><td><code>${esc(t.text)}</code></td></tr>`).join('');
+  return `<table><thead><tr><th>span</th><th>kind</th><th>text</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderDiagnostics(diags){
+  if (!diags || !diags.length) return '<div class="empty">No diagnostics &mdash; compiled cleanly.</div>';
+  return diags.map(d => {
+    const ctx = d.context || {};
+    const scope = (ctx.in_scope || []).map(s => `${s.name}:${s.type}`).join(', ');
+    return `<div class="diag-card">
+      <pre>${esc(d.rendered)}</pre>
+      <div class="diag-meta">
+        <span>code <code>${esc(d.code)}</code></span>
+        ${ctx.expected ? `<span>expected <code>${esc(ctx.expected)}</code></span>` : ''}
+        ${ctx.found ? `<span>found <code>${esc(ctx.found)}</code></span>` : ''}
+        ${scope ? `<span>in scope <code>${esc(scope)}</code></span>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderDiff(diffText){
+  if (!diffText) return '';
+  const lines = diffText.split('\n').map(l => {
+    let cls = '';
+    if (l.startsWith('+') && !l.startsWith('+++')) cls = 'diff-add';
+    else if (l.startsWith('-') && !l.startsWith('---')) cls = 'diff-del';
+    else if (l.startsWith('@@')) cls = 'diff-hunk';
+    return `<div class="diff-line ${cls}">${esc(l) || '&nbsp;'}</div>`;
+  }).join('');
+  return `<div class="note-box"><b>Every line the optimizer changed</b> &mdash; a rewrite that fired must, by construction, strictly lower static cost.</div><pre style="line-height:1.5">${lines}</pre>`;
+}
+
+async function compile_(){
+  const source = $('#source').value;
+  const optimize = $('#optimizeChk').checked;
+  const bar = $('#statusBar');
+  bar.className = 'status-bar';
+  bar.innerHTML = '<span class="dot"></span><span>compiling&hellip;</span>';
+  $('#runBtn').disabled = true;
+
+  let data;
+  try {
+    const resp = await fetch('/api/compile', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({source, optimize})
+    });
+    data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || ('HTTP ' + resp.status));
+  } catch (e) {
+    bar.className = 'status-bar err';
+    bar.innerHTML = `<span class="dot"></span><span>${esc(e.message)} &mdash; is the server running? (python3 web/server.py)</span>`;
+    $('#runBtn').disabled = false;
+    return;
+  }
+  $('#runBtn').disabled = false;
+
+  if (data.lex_error) {
+    bar.className = 'status-bar err';
+    bar.innerHTML = `<span class="dot"></span><span>lex error at ${data.lex_error.line}:${data.lex_error.col} &mdash; ${esc(data.lex_error.message)}</span>`;
+    $('#panel-tokens').innerHTML = '<div class="empty">Lexing failed before any tokens were produced.</div>';
+    setBadge('cnt-tokens', 0, null);
+    return;
+  }
+
+  $('#panel-tokens').innerHTML = renderTokens(data.tokens);
+  setBadge('cnt-tokens', data.tokens ? data.tokens.length : 0, null);
+
+  const diagN = (data.diagnostics || []).length;
+  $('#panel-diag').innerHTML = renderDiagnostics(data.diagnostics);
+  setBadge('cnt-diag', diagN, diagN ? 'has-err' : null);
+
+  if (!data.ok) {
+    bar.className = 'status-bar err';
+    bar.innerHTML = `<span class="dot"></span><span>${diagN} error(s) &mdash; see the Diagnostics tab</span>`;
+    $('#panel-ast').innerHTML = '<div class="empty">Type checking failed; no AST to show.</div>';
+    $('#panel-ir').innerHTML = '<div class="empty">Type checking failed; no IR generated.</div>';
+    $('#panel-opt').innerHTML = '<div class="empty">Type checking failed; nothing to optimize.</div>';
+    $('#panel-rules').innerHTML = '<div class="empty">Type checking failed; no rules could fire.</div>';
+    setBadge('cnt-opt', '–', null);
+    setBadge('cnt-rules', '–', null);
+    switchTab('diag');
+    return;
+  }
+
+  bar.className = 'status-bar ok';
+  bar.innerHTML = `<span class="dot"></span><span>compiled cleanly &mdash; ${data.ir_count} IR instructions` +
+    (data.optimized_count != null ? ` &rarr; ${data.optimized_count} after -O</span>` : `</span>`);
+
+  $('#panel-ast').innerHTML = `<pre>${esc(data.ast)}</pre>`;
+  $('#panel-ir').innerHTML = `<pre>${esc(data.ir)}</pre>`;
+
+  if (data.optimized_ir != null) {
+    const before = data.ir_count, after = data.optimized_count;
+    const pct = before ? (100 * (before - after) / before).toFixed(1) : '0.0';
+    let html = `<div class="kv">
+      <div class="item"><div class="n">${before}</div><div class="k">instructions before</div></div>
+      <div class="item"><div class="n">${after}</div><div class="k">instructions after</div></div>
+      <div class="item"><div class="n">${pct}%</div><div class="k">reduction</div></div>
+    </div>`;
+    html += data.diff ? renderDiff(data.diff)
+      : `<div class="note-box">No proven, cost-reducing rule matched this program &mdash; the IR is unchanged. Most programs won't match; on the six-program benchmark suite only 2 of 12 applicable rules ever fire.</div><pre>${esc(data.optimized_ir)}</pre>`;
+    $('#panel-opt').innerHTML = html;
+    setBadge('cnt-opt', after, after < before ? 'has-ok' : null);
+  } else {
+    $('#panel-opt').innerHTML = '<div class="empty">Optimization was not requested for this run.</div>';
+    setBadge('cnt-opt', '–', null);
+  }
+
+  const applied = data.rules_applied || {};
+  const names = Object.keys(applied);
+  if (names.length) {
+    const rows = names.map(n => `<tr><td class="name">${esc(n)}</td><td class="num">${applied[n]}</td>
+      <td>${esc(data.rules_notes[n] || '')}</td></tr>`).join('');
+    $('#panel-rules').innerHTML = `<table><thead><tr><th>rule</th><th>firings</th><th>why it's sound</th></tr></thead><tbody>${rows}</tbody></table>`;
+    setBadge('cnt-rules', names.length, 'has-ok');
+  } else {
+    $('#panel-rules').innerHTML = '<div class="empty">No rule in the proven, cost-reducing library matched this program.</div>';
+    setBadge('cnt-rules', 0, null);
+  }
+}
+
+$('#runBtn').addEventListener('click', compile_);
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') { e.preventDefault(); compile_(); }
+});
+
+async function loadSamples(){
+  const res = await fetch('/api/samples');
+  const samples = await res.json();
+  const sel = $('#sampleSelect');
+  Object.keys(samples).sort().forEach(name => {
+    const opt = document.createElement('option');
+    opt.value = name; opt.textContent = name + '.mc';
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => {
+    if (sel.value && samples[sel.value] != null) {
+      $('#source').value = samples[sel.value];
+      compile_();
+    }
+  });
+  const preferred = ['scale', 'gcd', 'bitmix'].find(n => samples[n] != null);
+  if (preferred) {
+    sel.value = preferred;
+    $('#source').value = samples[preferred];
+  }
+}
+
+function renderVerifier(data){
+  const rows = data.verdicts.map(v => {
+    const cls = 'v-' + v.status.toLowerCase();
+    const cex = v.counterexample && Object.keys(v.counterexample).length
+      ? Object.entries(v.counterexample).map(([k, val]) => `${k}=${val}`).join(', ')
+      : '&mdash;';
+    return `<tr><td class="name">${esc(v.name)}</td><td>${esc(v.file)}</td>
+      <td><span class="verdict ${cls}">${esc(v.status)}</span></td>
+      <td class="num">${v.solve_ms}&nbsp;ms</td><td class="mono">${esc(cex)}</td>
+      <td>${esc(v.note)}</td></tr>`;
+  }).join('');
+  const kv = `<div class="kv">
+    <div class="item"><div class="n">${data.verdicts.length}</div><div class="k">rules checked</div></div>
+    <div class="item"><div class="n">${data.proven}</div><div class="k">proven</div></div>
+    <div class="item"><div class="n">${data.applied}</div><div class="k">proven &amp; cost-reducing (applied)</div></div>
+  </div>`;
+  const note = `<div class="note-box">This ran once, offline, when the server started &mdash; <b>not</b> per keystroke. Compiling a program above consults this already-proven library; it never calls Z3 again.</div>`;
+  $('#panel-verifier').innerHTML = kv + note +
+    `<table><thead><tr><th>rule</th><th>file</th><th>verdict</th><th>solve time</th><th>counterexample</th><th>note</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+async function loadVerifier(){
+  const res = await fetch('/api/verifier');
+  const data = await res.json();
+  renderVerifier(data);
+  $('#libBadge').innerHTML = `<b>${data.proven}</b> proven &middot; <b>${data.applied}</b> applied by default`;
+}
+
+loadSamples();
+loadVerifier();
+</script>
+</body>
+</html>

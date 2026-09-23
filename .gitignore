@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+
+# LaTeX build byproducts -- paper.pdf is the deliverable and is committed,
+# these are regenerable intermediates.
+paper/paper.log
+paper/paper.xdv
+paper/*.aux
+
+# Secrets. Never commit an API key.
+.env
+
+# LLM mining artifacts that are large or regenerable, not source.
+results/llm_cache/
+results/*.jsonl

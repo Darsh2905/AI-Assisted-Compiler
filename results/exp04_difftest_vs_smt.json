@@ -1,0 +1,1998 @@
+{
+  "budgets": [
+    100,
+    1000,
+    10000,
+    100000
+  ],
+  "cost_ms": {
+    "difftest": 13745.414113916922,
+    "smt": 243.7214190431405,
+    "trials": 7777000
+  },
+  "false_alarms": [],
+  "proven_total": 20,
+  "refuted_total": 15,
+  "rules": {
+    "abs_is_nonnegative": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 516,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 516,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 516,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "int_min_only",
+      "smt": "REFUTED"
+    },
+    "add_self_to_shl1": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "add_split_or_and": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "and_not_self_zero": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "avg_via_add_shift": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 5,
+          "found": true
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 5,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 5,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 5,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 3,
+          "found": true
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 3,
+          "found": true
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 3,
+          "found": true
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 3,
+          "found": true
+        }
+      },
+      "origin": "adversarial",
+      "smt": "REFUTED"
+    },
+    "cmp_via_subtraction": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 4,
+          "found": true
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 4,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 4,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 4,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 5,
+          "found": true
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 5,
+          "found": true
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 5,
+          "found": true
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 5,
+          "found": true
+        }
+      },
+      "origin": "adversarial",
+      "smt": "REFUTED"
+    },
+    "demorgan_not_and": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "double_negation": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "double_not_is_neg": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 1,
+          "found": true
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 1,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 1,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 1,
+          "found": true
+        }
+      },
+      "origin": "adversarial",
+      "smt": "REFUTED"
+    },
+    "icmp_not_sgt_to_sle": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "icmp_sgt_swap": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "lt_neg_self": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 516,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 516,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 516,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "int_min_only",
+      "smt": "REFUTED"
+    },
+    "mul_div_cancel": {
+      "acceptance": 0.9938,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 1,
+          "found": true
+        },
+        "boundary@1000": {
+          "acceptance": 0.992,
+          "accepted": 992,
+          "first_at": 1,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 0.9932,
+          "accepted": 9932,
+          "first_at": 1,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 0.9938,
+          "accepted": 99382,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@1000": {
+          "acceptance": 0.995,
+          "accepted": 995,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@10000": {
+          "acceptance": 0.9945,
+          "accepted": 9945,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@100000": {
+          "acceptance": 0.9941,
+          "accepted": 99409,
+          "first_at": 1,
+          "found": true
+        }
+      },
+      "origin": "adversarial",
+      "smt": "REFUTED"
+    },
+    "mul_identity_with_magic_constant": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "canary",
+      "smt": "REFUTED"
+    },
+    "mul_neg_one_to_neg": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "mul_pow2_to_shl": {
+      "acceptance": 0.1999,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 0.19,
+          "accepted": 19,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 0.188,
+          "accepted": 188,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 0.2043,
+          "accepted": 2043,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 0.1999,
+          "accepted": 19992,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 0.2,
+          "accepted": 20,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 0.188,
+          "accepted": 188,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 0.1995,
+          "accepted": 1995,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 0.2015,
+          "accepted": 20146,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "mul_three_to_shift_add": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "or_is_add": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 2,
+          "found": true
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 2,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 2,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 2,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 1,
+          "found": true
+        }
+      },
+      "origin": "adversarial",
+      "smt": "REFUTED"
+    },
+    "or_not_self_ones": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "or_zero_identity": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "sdiv2_to_ashr": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 6,
+          "found": true
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 6,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 6,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 6,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 6,
+          "found": true
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 6,
+          "found": true
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 6,
+          "found": true
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 6,
+          "found": true
+        }
+      },
+      "origin": "adversarial",
+      "smt": "REFUTED"
+    },
+    "sdiv_by_one": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "sdiv_neg_pow2_to_shift": {
+      "acceptance": 0.2014,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 0.21,
+          "accepted": 21,
+          "first_at": 6,
+          "found": true
+        },
+        "boundary@1000": {
+          "acceptance": 0.2,
+          "accepted": 200,
+          "first_at": 6,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 0.203,
+          "accepted": 2030,
+          "first_at": 6,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 0.2014,
+          "accepted": 20142,
+          "first_at": 6,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 0.18,
+          "accepted": 18,
+          "first_at": 6,
+          "found": true
+        },
+        "uniform@1000": {
+          "acceptance": 0.195,
+          "accepted": 195,
+          "first_at": 6,
+          "found": true
+        },
+        "uniform@10000": {
+          "acceptance": 0.1985,
+          "accepted": 1985,
+          "first_at": 6,
+          "found": true
+        },
+        "uniform@100000": {
+          "acceptance": 0.2017,
+          "accepted": 20173,
+          "first_at": 6,
+          "found": true
+        }
+      },
+      "origin": "adversarial",
+      "smt": "REFUTED"
+    },
+    "select_same_arms": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "shift_roundtrip": {
+      "acceptance": 0.0813,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 0.07,
+          "accepted": 7,
+          "first_at": 11,
+          "found": true
+        },
+        "boundary@1000": {
+          "acceptance": 0.085,
+          "accepted": 85,
+          "first_at": 11,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 0.0816,
+          "accepted": 816,
+          "first_at": 11,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 0.0813,
+          "accepted": 8131,
+          "first_at": 11,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 0.1,
+          "accepted": 10,
+          "first_at": 11,
+          "found": true
+        },
+        "uniform@1000": {
+          "acceptance": 0.085,
+          "accepted": 85,
+          "first_at": 11,
+          "found": true
+        },
+        "uniform@10000": {
+          "acceptance": 0.0796,
+          "accepted": 796,
+          "first_at": 11,
+          "found": true
+        },
+        "uniform@100000": {
+          "acceptance": 0.0816,
+          "accepted": 8158,
+          "first_at": 11,
+          "found": true
+        }
+      },
+      "origin": "adversarial",
+      "smt": "REFUTED"
+    },
+    "shl_mask_trap_erasure": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 1,
+          "found": true
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 1,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 1,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 1,
+          "found": true
+        }
+      },
+      "origin": "adversarial",
+      "smt": "REFUTED"
+    },
+    "shl_shl_combine": {
+      "acceptance": 0.0057,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 0.01,
+          "accepted": 1,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 0.006,
+          "accepted": 6,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 0.0052,
+          "accepted": 52,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 0.0057,
+          "accepted": 568,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 0.01,
+          "accepted": 1,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 0.007,
+          "accepted": 7,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 0.0071,
+          "accepted": 71,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 0.0059,
+          "accepted": 588,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "srem_by_one": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "srem_pow2_to_mask": {
+      "acceptance": 0.1999,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 0.19,
+          "accepted": 19,
+          "first_at": 1,
+          "found": true
+        },
+        "boundary@1000": {
+          "acceptance": 0.188,
+          "accepted": 188,
+          "first_at": 1,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 0.2043,
+          "accepted": 2043,
+          "first_at": 1,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 0.1999,
+          "accepted": 19992,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 0.2,
+          "accepted": 20,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@1000": {
+          "acceptance": 0.188,
+          "accepted": 188,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@10000": {
+          "acceptance": 0.1995,
+          "accepted": 1995,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@100000": {
+          "acceptance": 0.2015,
+          "accepted": 20146,
+          "first_at": 1,
+          "found": true
+        }
+      },
+      "origin": "adversarial",
+      "smt": "REFUTED"
+    },
+    "sub_or_to_and": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "sub_self_to_zero": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "succ_greater_than_self": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 156,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 156,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 156,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "int_min_only",
+      "smt": "REFUTED"
+    },
+    "xor_and_sum_is_add": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 2,
+          "found": true
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 2,
+          "found": true
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 2,
+          "found": true
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 2,
+          "found": true
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": 1,
+          "found": true
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": 1,
+          "found": true
+        }
+      },
+      "origin": "adversarial",
+      "smt": "REFUTED"
+    },
+    "xor_and_to_or": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    },
+    "xor_self_to_zero": {
+      "acceptance": 1.0,
+      "configs": {
+        "boundary@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "boundary@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100": {
+          "acceptance": 1.0,
+          "accepted": 100,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@1000": {
+          "acceptance": 1.0,
+          "accepted": 1000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@10000": {
+          "acceptance": 1.0,
+          "accepted": 10000,
+          "first_at": null,
+          "found": false
+        },
+        "uniform@100000": {
+          "acceptance": 1.0,
+          "accepted": 100000,
+          "first_at": null,
+          "found": false
+        }
+      },
+      "origin": "textbook",
+      "smt": "PROVEN"
+    }
+  },
+  "seed": 20260916,
+  "strategies": {
+    "boundary": 0.5,
+    "uniform": 0.0
+  },
+  "summary": [
+    {
+      "budget": 100,
+      "caught": "11/15",
+      "rate": "73.3%",
+      "strategy": "uniform"
+    },
+    {
+      "budget": 1000,
+      "caught": "11/15",
+      "rate": "73.3%",
+      "strategy": "uniform"
+    },
+    {
+      "budget": 10000,
+      "caught": "11/15",
+      "rate": "73.3%",
+      "strategy": "uniform"
+    },
+    {
+      "budget": 100000,
+      "caught": "11/15",
+      "rate": "73.3%",
+      "strategy": "uniform"
+    },
+    {
+      "budget": 100,
+      "caught": "11/15",
+      "rate": "73.3%",
+      "strategy": "boundary"
+    },
+    {
+      "budget": 1000,
+      "caught": "14/15",
+      "rate": "93.3%",
+      "strategy": "boundary"
+    },
+    {
+      "budget": 10000,
+      "caught": "14/15",
+      "rate": "93.3%",
+      "strategy": "boundary"
+    },
+    {
+      "budget": 100000,
+      "caught": "14/15",
+      "rate": "93.3%",
+      "strategy": "boundary"
+    }
+  ]
+}

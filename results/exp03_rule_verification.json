@@ -1,0 +1,520 @@
+{
+  "by_file": {
+    "adversarial.rules": [
+      {
+        "counterexample": {
+          "x": 4294967295
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 8,
+        "name": "sdiv2_to_ashr",
+        "origin": "adversarial",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 4.44,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "C": 2147483648,
+          "x": 3219130368
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 8,
+        "name": "srem_pow2_to_mask",
+        "origin": "adversarial",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 87.19,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "C": 176160769,
+          "x": 268435454
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 11,
+        "name": "mul_div_cancel",
+        "origin": "adversarial",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 79.29,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "x": 1785339204,
+          "y": 916891086
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 2,
+        "name": "avg_via_add_shift",
+        "origin": "adversarial",
+        "profitable": false,
+        "rewrite_cost": 4,
+        "solve_ms": 5.71,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "C": 30,
+          "x": 2629727044
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 2,
+        "name": "shift_roundtrip",
+        "origin": "adversarial",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 2.92,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "x": 2333854246,
+          "y": 908152832
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 1,
+        "name": "cmp_via_subtraction",
+        "origin": "adversarial",
+        "profitable": false,
+        "rewrite_cost": 2,
+        "solve_ms": 2.05,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "x": 65535,
+          "y": 2147483664
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 1,
+        "name": "shl_mask_trap_erasure",
+        "origin": "adversarial",
+        "profitable": false,
+        "rewrite_cost": 2,
+        "solve_ms": 1.67,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "x": 3757961084,
+          "y": 1078239492
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 1,
+        "name": "or_is_add",
+        "origin": "adversarial",
+        "profitable": false,
+        "rewrite_cost": 1,
+        "solve_ms": 1.6,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "x": 4294705105,
+          "y": 786481
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 3,
+        "name": "xor_and_sum_is_add",
+        "origin": "adversarial",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 2.04,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "x": 128
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 2,
+        "name": "double_not_is_neg",
+        "origin": "adversarial",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 1.26,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "C": 4294959104,
+          "x": 2660717111
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 8,
+        "name": "sdiv_neg_pow2_to_shift",
+        "origin": "adversarial",
+        "profitable": true,
+        "rewrite_cost": 2,
+        "solve_ms": 25.21,
+        "status": "REFUTED"
+      }
+    ],
+    "hard.rules": [
+      {
+        "counterexample": {
+          "C": 49152,
+          "x": 116054
+        },
+        "detail": "",
+        "expect": "inconclusive",
+        "match_cost": 14,
+        "name": "mul_div_symbolic_roundtrip",
+        "origin": "hard",
+        "profitable": true,
+        "rewrite_cost": 9,
+        "solve_ms": 122.34,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "C": 1515870810,
+          "x": 1431655771
+        },
+        "detail": "",
+        "expect": "inconclusive",
+        "match_cost": 3,
+        "name": "mul_commutes_through_magic",
+        "origin": "hard",
+        "profitable": false,
+        "rewrite_cost": 5,
+        "solve_ms": 13.46,
+        "status": "REFUTED"
+      }
+    ],
+    "stealth.rules": [
+      {
+        "counterexample": {
+          "x": 2147483648
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 2,
+        "name": "lt_neg_self",
+        "origin": "int_min_only",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 2.2,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "x": 2147483648
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 4,
+        "name": "abs_is_nonnegative",
+        "origin": "int_min_only",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 0.96,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "x": 2147483647
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 2,
+        "name": "succ_greater_than_self",
+        "origin": "int_min_only",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 1.79,
+        "status": "REFUTED"
+      },
+      {
+        "counterexample": {
+          "C": 1515870810,
+          "x": 359938358
+        },
+        "detail": "",
+        "expect": "refuted",
+        "match_cost": 3,
+        "name": "mul_identity_with_magic_constant",
+        "origin": "canary",
+        "profitable": false,
+        "rewrite_cost": 5,
+        "solve_ms": 7.47,
+        "status": "REFUTED"
+      }
+    ],
+    "textbook.rules": [
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 1,
+        "name": "or_zero_identity",
+        "origin": "textbook",
+        "profitable": false,
+        "rewrite_cost": 1,
+        "solve_ms": 0.44,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 1,
+        "name": "add_self_to_shl1",
+        "origin": "textbook",
+        "profitable": false,
+        "rewrite_cost": 1,
+        "solve_ms": 0.66,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 3,
+        "name": "mul_pow2_to_shl",
+        "origin": "textbook",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 46.55,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 3,
+        "name": "mul_three_to_shift_add",
+        "origin": "textbook",
+        "profitable": true,
+        "rewrite_cost": 2,
+        "solve_ms": 0.82,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 3,
+        "name": "mul_neg_one_to_neg",
+        "origin": "textbook",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 0.34,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 1,
+        "name": "sub_self_to_zero",
+        "origin": "textbook",
+        "profitable": false,
+        "rewrite_cost": 1,
+        "solve_ms": 0.32,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 1,
+        "name": "xor_self_to_zero",
+        "origin": "textbook",
+        "profitable": false,
+        "rewrite_cost": 1,
+        "solve_ms": 0.31,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 2,
+        "name": "double_negation",
+        "origin": "textbook",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 0.39,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 2,
+        "name": "and_not_self_zero",
+        "origin": "textbook",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 0.39,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 2,
+        "name": "or_not_self_ones",
+        "origin": "textbook",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 0.38,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 2,
+        "name": "demorgan_not_and",
+        "origin": "textbook",
+        "profitable": false,
+        "rewrite_cost": 3,
+        "solve_ms": 0.47,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 1,
+        "name": "add_split_or_and",
+        "origin": "textbook",
+        "profitable": false,
+        "rewrite_cost": 3,
+        "solve_ms": 5.24,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 3,
+        "name": "sub_or_to_and",
+        "origin": "textbook",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 8.73,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 3,
+        "name": "xor_and_to_or",
+        "origin": "textbook",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 2.76,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 2,
+        "name": "shl_shl_combine",
+        "origin": "textbook",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 3.7,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 8,
+        "name": "sdiv_by_one",
+        "origin": "textbook",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 0.43,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 8,
+        "name": "srem_by_one",
+        "origin": "textbook",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 0.36,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 1,
+        "name": "select_same_arms",
+        "origin": "textbook",
+        "profitable": false,
+        "rewrite_cost": 1,
+        "solve_ms": 0.35,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 1,
+        "name": "icmp_sgt_swap",
+        "origin": "textbook",
+        "profitable": false,
+        "rewrite_cost": 1,
+        "solve_ms": 0.33,
+        "status": "PROVEN"
+      },
+      {
+        "counterexample": {},
+        "detail": "",
+        "expect": "proven",
+        "match_cost": 2,
+        "name": "icmp_not_sgt_to_sle",
+        "origin": "textbook",
+        "profitable": true,
+        "rewrite_cost": 1,
+        "solve_ms": 0.37,
+        "status": "PROVEN"
+      }
+    ]
+  },
+  "expectation_mismatches": [],
+  "replay": {
+    "confirmed": 17,
+    "divergences": [],
+    "produced": 17
+  },
+  "solve_ms": {
+    "max": 122.34316702233627,
+    "median": 1.672917016549036,
+    "min": 0.31250002211891115,
+    "total": 434.94891515001655
+  },
+  "status_counts": {
+    "PROVEN": 20,
+    "REFUTED": 17
+  },
+  "timeout_ms": 10000,
+  "total": 37
+}

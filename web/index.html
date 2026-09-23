@@ -1,0 +1,377 @@
+<title>ProveIt-C</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+  :root{
+    --bg:#f2f5f6; --surface:#ffffff; --surface-2:#eaeff1;
+    --ink:#101d26; --muted:#566b78; --faint:#7d919c;
+    --rule:#d8e0e4; --rule-strong:#bcc9cf;
+    --accent:#0f6f68; --accent-soft:#d8ebe8;
+    --proven:#1a7a3e; --refuted:#b3261e; --unsettled:#9a6700; --absent:#8c9ca6;
+    --proven-bg:#e2f2e8; --refuted-bg:#fbe6e4; --unsettled-bg:#f8eed6; --absent-bg:#e7ecef;
+    --shadow:0 1px 2px rgba(16,29,38,.06), 0 8px 24px -16px rgba(16,29,38,.22);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0c1216; --surface:#141d23; --surface-2:#1b262d;
+      --ink:#e4ecf0; --muted:#96aab6; --faint:#748a97;
+      --rule:#243139; --rule-strong:#33454f;
+      --accent:#37b3a6; --accent-soft:#12312f;
+      --proven:#5cc27e; --refuted:#f08279; --unsettled:#d9a83c; --absent:#7c909c;
+      --proven-bg:#122a1c; --refuted-bg:#2e1614; --unsettled-bg:#2c2312; --absent-bg:#1c262c;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0c1216; --surface:#141d23; --surface-2:#1b262d;
+    --ink:#e4ecf0; --muted:#96aab6; --faint:#748a97;
+    --rule:#243139; --rule-strong:#33454f;
+    --accent:#37b3a6; --accent-soft:#12312f;
+    --proven:#5cc27e; --refuted:#f08279; --unsettled:#d9a83c; --absent:#7c909c;
+    --proven-bg:#122a1c; --refuted-bg:#2e1614; --unsettled-bg:#2c2312; --absent-bg:#1c262c;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink); margin:0;
+    font:400 16px/1.62 "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1000px; margin:0 auto; padding-inline:20px; padding-block:0 72px}
+  .prose{max-width:66ch}
+
+  h1,h2,h3{font-family:"IBM Plex Serif", Georgia, serif; text-wrap:balance; margin:0}
+  h1{font-size:clamp(2rem,5vw,2.9rem); font-weight:600; letter-spacing:-.02em; line-height:1.1}
+  h2{font-size:1.42rem; font-weight:600; letter-spacing:-.01em}
+  h3{font-size:1.06rem; font-weight:600}
+  p{margin:0}
+  a{color:var(--accent)}
+
+  .eyebrow{
+    font:500 .72rem/1 "IBM Plex Mono", ui-monospace, monospace;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--faint);
+  }
+  code, .mono{font-family:"IBM Plex Mono", ui-monospace, Menlo, monospace}
+  code{font-size:.88em; background:var(--surface-2); padding:1px 5px; border-radius:4px}
+
+  /* ---- header ---- */
+  header{border-bottom:1px solid var(--rule); background:var(--surface)}
+  .head-inner{
+    max-width:1000px; margin:0 auto; padding-inline:20px; padding-block:44px 38px;
+    display:flex; flex-direction:column; gap:18px;
+  }
+  .thesis{font-size:1.12rem; color:var(--muted); max-width:60ch}
+  .thesis strong{color:var(--ink); font-weight:600}
+  .chips{display:flex; flex-wrap:wrap; gap:8px}
+  .chip{
+    font:500 .74rem/1 "IBM Plex Mono", monospace; letter-spacing:.04em;
+    padding:6px 10px; border-radius:999px; border:1px solid var(--rule-strong);
+    color:var(--muted); background:var(--surface-2);
+  }
+  .chip.live{border-color:var(--accent); color:var(--accent); background:var(--accent-soft)}
+
+  /* ---- sections ---- */
+  section{margin-top:56px; display:flex; flex-direction:column; gap:20px}
+  .sec-head{display:flex; flex-direction:column; gap:7px}
+
+  /* ---- metric tiles ---- */
+  .tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:1px;
+    background:var(--rule); border:1px solid var(--rule); border-radius:10px; overflow:hidden}
+  .tile{background:var(--surface); padding:18px 18px 16px; display:flex; flex-direction:column; gap:5px}
+  .tile .n{font:500 1.9rem/1 "IBM Plex Mono", monospace; letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums}
+  .tile .k{font-size:.82rem; color:var(--muted); line-height:1.42}
+  .tile .n.good{color:var(--proven)} .tile .n.warn{color:var(--unsettled)}
+
+  /* ---- tables ---- */
+  .scroller{overflow-x:auto; border:1px solid var(--rule); border-radius:10px; background:var(--surface)}
+  table{border-collapse:collapse; width:100%; font-size:.9rem}
+  th,td{text-align:left; padding:10px 14px; border-bottom:1px solid var(--rule); vertical-align:top}
+  thead th{
+    font:500 .7rem/1.3 "IBM Plex Mono", monospace; letter-spacing:.09em;
+    text-transform:uppercase; color:var(--faint); background:var(--surface-2);
+    white-space:nowrap; border-bottom:1px solid var(--rule-strong);
+  }
+  tbody tr:last-child td{border-bottom:0}
+  td.num{font-family:"IBM Plex Mono", monospace; font-variant-numeric:tabular-nums; white-space:nowrap}
+  td.name{font-family:"IBM Plex Mono", monospace; font-size:.85rem; white-space:nowrap}
+  tr.total td{font-weight:600; background:var(--surface-2)}
+
+  .state{
+    font:500 .7rem/1 "IBM Plex Mono", monospace; letter-spacing:.05em; text-transform:uppercase;
+    padding:4px 8px; border-radius:5px; white-space:nowrap; display:inline-block;
+  }
+  .s-done{color:var(--proven); background:var(--proven-bg)}
+  .s-part{color:var(--unsettled); background:var(--unsettled-bg)}
+  .s-none{color:var(--absent); background:var(--absent-bg)}
+  .s-ref{color:var(--refuted); background:var(--refuted-bg)}
+
+  /* ---- detection matrix ---- */
+  .matrix td.num{text-align:center; font-weight:500}
+  .hit{color:var(--refuted)} .miss{color:var(--absent)} .all{color:var(--proven)}
+  .bar{display:block; height:5px; border-radius:3px; background:var(--rule); margin-top:5px; position:relative; overflow:hidden}
+  .bar i{position:absolute; inset:0 auto 0 0; background:currentColor; border-radius:3px}
+
+  /* ---- callouts ---- */
+  .note{
+    border-left:3px solid var(--accent); background:var(--surface);
+    padding:16px 18px; border-radius:0 8px 8px 0; display:flex; flex-direction:column; gap:8px;
+    box-shadow:var(--shadow);
+  }
+  .note.warn{border-left-color:var(--unsettled)}
+  .note h3{font-family:"IBM Plex Sans",sans-serif; font-size:.95rem}
+  .note p{font-size:.93rem; color:var(--muted)}
+  .note p strong{color:var(--ink)}
+
+  ul{margin:0; padding-left:1.15em; display:flex; flex-direction:column; gap:9px; color:var(--muted)}
+  li strong{color:var(--ink); font-weight:600}
+
+  pre.sh{
+    background:var(--surface); border:1px solid var(--rule); border-radius:10px;
+    padding:16px 18px; overflow-x:auto; margin:0;
+    font:400 .84rem/1.75 "IBM Plex Mono", monospace; color:var(--ink);
+  }
+  pre.sh .c{color:var(--faint)}
+
+  .mermaid{background:var(--surface); border:1px solid var(--rule); border-radius:10px;
+    padding:20px 12px; overflow-x:auto}
+
+  footer{margin-top:64px; padding-top:22px; border-top:1px solid var(--rule);
+    color:var(--faint); font-size:.85rem; display:flex; flex-direction:column; gap:6px}
+
+  @media (max-width:620px){
+    .tile .n{font-size:1.55rem}
+    th,td{padding:9px 11px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<header>
+  <div class="head-inner">
+    <span class="eyebrow">Implementation status &middot; 16 September 2026</span>
+    <h1>ProveIt-C</h1>
+    <p class="thesis">A compiler for a small C-like language in which <strong>an AI proposes and a deterministic verifier decides</strong>. Every rewrite is an untrusted proposal until an SMT solver proves it equivalent over all inputs &mdash; and because operands and constants are symbolic, one proof covers every instance of the pattern, so <strong>the model never runs at build time</strong>.</p>
+    <div class="chips">
+      <span class="chip live">~30% built</span>
+      <span class="chip">184 tests passing</span>
+      <span class="chip">6,440 lines &middot; 43 files</span>
+      <span class="chip">Z3 5.1.0 &middot; Python 3.12</span>
+      <span class="chip s-none" style="border-style:dashed">no LLM wired up yet</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">The trust boundary</span>
+      <h2>Where a proposal has to earn its place</h2>
+      <p class="prose" style="color:var(--muted)">Four gates, each of which can reject. Only the last box runs during a build, and nothing in it performs inference.</p>
+    </div>
+<pre class="mermaid">
+flowchart TD
+  P["Proposal<br/>(untrusted)"] --> D{"Differential test<br/>random + boundary"}
+  D -->|"counterexample"| R["Rejected"]
+  D -->|"survives"| S{"SMT equivalence<br/>symbolic, all inputs"}
+  S -->|"sat"| R
+  S -->|"unknown"| Q["Quarantined<br/>never counted as proof"]
+  S -->|"unsat"| G{"Static cost model"}
+  G -->|"not cheaper"| H["Held back<br/>proven, not profitable"]
+  G -->|"strictly cheaper"| L[("Rule library<br/>versioned")]
+  L --> C["BUILD TIME<br/>match and rewrite<br/>no model, no network"]
+</pre>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Measured</span>
+      <h2>Headline numbers</h2>
+      <p class="prose" style="color:var(--muted)">Every figure on this page is printed by a script in <code>experiments/</code> and written to <code>results/*.json</code>. None of it is typed in by hand.</p>
+    </div>
+    <div class="tiles">
+      <div class="tile"><span class="n good">0</span><span class="k">LL(1) conflicts in the MiniC grammar (58 nonterminals, 109 productions)</span></div>
+      <div class="tile"><span class="n">20&hairsp;/&hairsp;17</span><span class="k">rules proven / refuted, all matching their declared verdict</span></div>
+      <div class="tile"><span class="n good">17&hairsp;/&hairsp;17</span><span class="k">solver counterexamples reproduced by an independent interpreter</span></div>
+      <div class="tile"><span class="n">1.6&thinsp;ms</span><span class="k">median solve time per rule (max 118&thinsp;ms)</span></div>
+      <div class="tile"><span class="n warn">73.3%</span><span class="k">of wrong rules that random testing catches &mdash; at <em>any</em> budget</span></div>
+      <div class="tile"><span class="n good">100%</span><span class="k">caught by the solver, which does not sample</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Finding 1</span>
+      <h2>Testing is budget-bound. Proving is not.</h2>
+      <p class="prose" style="color:var(--muted)"><code>rulelib/stealth.rules</code> holds rewrites that are wrong on a vanishing fraction of their input space. Each was run under eight tester configurations and against the solver.</p>
+    </div>
+    <div class="scroller">
+      <table class="matrix">
+        <thead><tr>
+          <th>Checker</th><th>100 trials</th><th>1,000</th><th>10,000</th><th>100,000</th><th>Cost per rule</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td>Uniform random sampling</td>
+            <td class="num miss">73.3%<span class="bar"><i style="width:73.3%"></i></span></td>
+            <td class="num miss">73.3%<span class="bar"><i style="width:73.3%"></i></span></td>
+            <td class="num miss">73.3%<span class="bar"><i style="width:73.3%"></i></span></td>
+            <td class="num miss">73.3%<span class="bar"><i style="width:73.3%"></i></span></td>
+            <td class="num">0.04&ndash;38&thinsp;ms</td>
+          </tr>
+          <tr>
+            <td>Boundary-seeded sampling</td>
+            <td class="num miss">73.3%<span class="bar"><i style="width:73.3%"></i></span></td>
+            <td class="num hit">93.3%<span class="bar"><i style="width:93.3%"></i></span></td>
+            <td class="num hit">93.3%<span class="bar"><i style="width:93.3%"></i></span></td>
+            <td class="num hit">93.3%<span class="bar"><i style="width:93.3%"></i></span></td>
+            <td class="num">0.04&ndash;38&thinsp;ms</td>
+          </tr>
+          <tr class="total">
+            <td>SMT solver</td>
+            <td class="num all">100%<span class="bar"><i style="width:100%"></i></span></td>
+            <td class="num all">100%<span class="bar"><i style="width:100%"></i></span></td>
+            <td class="num all">100%<span class="bar"><i style="width:100%"></i></span></td>
+            <td class="num all">100%<span class="bar"><i style="width:100%"></i></span></td>
+            <td class="num">6.7&thinsp;ms</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <h3>Two things a bigger test budget will not fix</h3>
+      <p><strong>Uniform random sampling does not improve with budget.</strong> A thousandfold increase &mdash; 100 to 100,000 trials &mdash; catches nothing extra, because the rules it misses are wrong on roughly one input in 2<sup>32</sup>. Boundary seeding recovers three of them and then also plateaus.</p>
+      <p><strong>The fourth survives everything.</strong> A rewrite that is the identity for every constant except <code>0x5A5A5A5A</code> escaped all eight configurations across <strong>7.8 million trials</strong>. Boundary seeding covers the values someone thought to enumerate; it is a heuristic, not a method. The solver returns its counterexample in 13&thinsp;ms.</p>
+    </div>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Rule the tester missed</th><th>Why it is wrong</th><th>Caught by</th><th>Solver's counterexample</th></tr></thead>
+        <tbody>
+          <tr><td class="name">lt_neg_self</td><td><code>x &lt; -x</code> is <code>x &lt; 0</code> except where <code>-x</code> wraps to itself</td><td class="num">3 of 8 configs</td><td class="num">x = &minus;2147483648</td></tr>
+          <tr><td class="name">abs_is_nonnegative</td><td>the branchless <code>abs</code> idiom returns INT_MIN for INT_MIN</td><td class="num">3 of 8 configs</td><td class="num">x = &minus;2147483648</td></tr>
+          <tr><td class="name">succ_greater_than_self</td><td><code>x + 1 &gt; x</code> fails where the increment wraps</td><td class="num">3 of 8 configs</td><td class="num">x = 2147483647</td></tr>
+          <tr><td class="name">mul_identity_with_magic_constant</td><td>identity for every constant but one hallucinated value</td><td class="num s-ref">never</td><td class="num">C = 1515870810</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prose" style="color:var(--muted); font-size:.93rem">Control: <strong>zero false alarms</strong> across 20 proven rules &times; 8 configurations. A proven rule that testing refuted would mean the encoder and the reference interpreter had diverged.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Finding 2</span>
+      <h2>Values are not the whole of meaning</h2>
+    </div>
+    <div class="note">
+      <h3>The rule that is correct on every input and still unsound</h3>
+      <p><code>shl_mask_trap_erasure</code> masks a shift amount to five bits, exactly as the hardware does. In MiniC a shift of 32 or more <strong>traps</strong>, and a trap is observable. The rewrite agrees with the original on every input that produces a value, and is refuted only because it deletes a trap. A checker comparing values alone would pass it; this one reports <span class="state s-ref">refuted</span> with the counterexample <code>y = 32</code>.</p>
+      <p>That is why the obligation discharged is <em>trap-preserving</em> equivalence: both sides must trap on the same inputs, and agree on values everywhere else.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Finding 3</span>
+      <h2>Proven is not the same as profitable</h2>
+    </div>
+    <div class="note warn">
+      <h3>A correct rule that made every program worse</h3>
+      <p>The first run of the rule applier grew the benchmark suite by about 60%. The culprit was <code>add_split_or_and</code> &mdash; <code>x + y == (x|y) + (x&amp;y)</code> &mdash; which is perfectly correct and turns one instruction into three. <strong>It fired 375 times.</strong></p>
+      <p>A proof says a rewrite preserves meaning. It says nothing about whether the rewrite is an improvement, and the two decisions need separate machinery. The applier now consults a static cost model and fires a rule only when it <em>strictly</em> reduces cost: <strong>12 of 20</strong> proven rules qualify, and the other eight are kept in the library, marked, and never applied.</p>
+    </div>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Program</th><th>IR before</th><th>after</th><th>Reduction</th><th>Rule firings</th></tr></thead>
+        <tbody>
+          <tr><td class="name">bitmix.mc</td><td class="num">99</td><td class="num">94</td><td class="num">5.1%</td><td class="num">6</td></tr>
+          <tr><td class="name">gcd.mc</td><td class="num">58</td><td class="num">58</td><td class="num">0.0%</td><td class="num">0</td></tr>
+          <tr><td class="name">matmul.mc</td><td class="num">225</td><td class="num">221</td><td class="num">1.8%</td><td class="num">4</td></tr>
+          <tr><td class="name">numeric.mc</td><td class="num">181</td><td class="num">180</td><td class="num">0.6%</td><td class="num">1</td></tr>
+          <tr><td class="name">sort.mc</td><td class="num">209</td><td class="num">205</td><td class="num">1.9%</td><td class="num">0</td></tr>
+          <tr><td class="name">stencil.mc</td><td class="num">261</td><td class="num">260</td><td class="num">0.4%</td><td class="num">1</td></tr>
+          <tr class="total"><td>Total</td><td class="num">1,033</td><td class="num">1,018</td><td class="num">1.5%</td><td class="num">12</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prose" style="color:var(--muted); font-size:.93rem">The reduction is small, and the reason is worth stating plainly: <strong>only 2 of the 12 applicable rules ever match six programs.</strong> That is a fact about the corpus, not about the method, and it is the strongest argument for the corpus work that comes next. Recompiling any program against the same library reproduces byte-identical IR.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Finding 4</span>
+      <h2>Where the checker stops answering</h2>
+    </div>
+    <div class="note warn">
+      <p>Two rules in <code>rulelib/hard.rules</code> multiply symbolic 32-bit values on both sides with no shared structure &mdash; two full 32&times;32 multiplier circuits after bit-blasting. Z3 returns <code>unknown</code> on one run and <code>sat</code> on the next <em>for the same query</em>. They are quarantined, and only the safety half is asserted: an unsettled query must never be reported as proven. <strong>A timeout costs coverage, never soundness.</strong></p>
+      <p>This is the same wall the recent literature reports. Kwon et al. (CGO&nbsp;'26) find ~20% of TSVC loops unverifiable by Alive2 even after verification-friendly rewriting; Fang et al. (CGO&nbsp;'26) exclude solver timeouts from their training set outright.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Inventory</span>
+      <h2>What is built</h2>
+    </div>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Component</th><th>State</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td>MiniC grammar, proven LL(1)</td><td><span class="state s-done">done</span></td><td>430 table cells, 0 conflicts</td></tr>
+          <tr><td>Formal semantics &mdash; wrap, trap, trap-preserving equivalence</td><td><span class="state s-done">done</span></td><td><code>spec/semantics.md</code>, frozen</td></tr>
+          <tr><td>Lexer, recursive-descent parser, source spans</td><td><span class="state s-done">done</span></td><td>6 of 6 benchmarks parse</td></tr>
+          <tr><td>Semantic analysis, 22 error codes, panic-mode recovery</td><td><span class="state s-done">done</span></td><td>76 of 80 mutants detected</td></tr>
+          <tr><td>Grounded diagnostic context (Module&nbsp;A substrate)</td><td><span class="state s-done">done</span></td><td>162 diagnostics, all with span + scope + window</td></tr>
+          <tr><td>IR, textual form, print/parse round trip</td><td><span class="state s-done">done</span></td><td>500 random modules, 21 opcodes, 0 failures</td></tr>
+          <tr><td>IR generation from AST</td><td><span class="state s-part">partial</span></td><td>alloca/load/store form &mdash; <em>not SSA</em>, no phi insertion</td></tr>
+          <tr><td>Rule DSL &mdash; symbolic operands, preconditions, types</td><td><span class="state s-done">done</span></td><td>37 rules parse; malformed rules rejected</td></tr>
+          <tr><td>SMT encoder to QF_BV, trap-preserving</td><td><span class="state s-done">done</span></td><td>20 proven, 17 refuted, median 1.6&thinsp;ms</td></tr>
+          <tr><td>Reference interpreter (independent 2nd implementation)</td><td><span class="state s-done">done</span></td><td>17 of 17 counterexamples reproduced</td></tr>
+          <tr><td>Differential tester</td><td><span class="state s-done">done</span></td><td>7.8M trials across the grid</td></tr>
+          <tr><td>Deterministic rule applier + cost model</td><td><span class="state s-done">done</span></td><td>byte-identical IR across runs</td></tr>
+          <tr><td>Constant folding, trap-safe DCE</td><td><span class="state s-done">done</span></td><td>a dead <code>sdiv</code> is never removed</td></tr>
+          <tr><td>Backend &mdash; llvmlite to native code</td><td><span class="state s-none">not started</span></td><td>&mdash;</td></tr>
+          <tr><td>Module&nbsp;A &mdash; the model call and patch verifier</td><td><span class="state s-none">not started</span></td><td>grounding layer only</td></tr>
+          <tr><td>Module&nbsp;B &mdash; the LLM rule miner</td><td><span class="state s-none">not started</span></td><td><strong>RQ1 unanswered</strong></td></tr>
+          <tr><td>Module&nbsp;C &mdash; pass ordering</td><td><span class="state s-none">not started</span></td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Honesty</span>
+      <h2>What these numbers do not show</h2>
+    </div>
+    <ul class="prose">
+      <li><strong>There is no LLM anywhere in this code.</strong> The project's headline question &mdash; how often is a test-passing rewrite actually wrong? &mdash; is <em>not answered</em>. What the detection matrix shows is that the apparatus would catch such rewrites, using rules we wrote specifically to be hard to catch.</li>
+      <li><strong>MiniC is not C.</strong> Undefined behaviour was defined away so that equivalence would be decidable. That is the trade this design makes, and it means no result here is a result about C.</li>
+      <li><strong>The IR is not in SSA form.</strong> <code>phi</code> exists in the representation and the round-trip tests, but nothing generates it.</li>
+      <li><strong>The cost model is ordinal placeholders</strong>, not measured latencies. No performance claim is made and none should be read in.</li>
+      <li><strong>Matching is syntactic and block-local.</strong> No reassociation, no canonicalisation. Reported match rates are a floor, not a ceiling.</li>
+      <li><strong>Preconditions constrain constants only</strong>, so a rule needing a fact about a <em>value</em> &mdash; <code>x % 2<sup>k</sup> == x &amp; (2<sup>k</sup>&minus;1)</code> for non-negative <code>x</code> &mdash; cannot currently be expressed.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Reproducing</span>
+      <h2>Run it</h2>
+    </div>
+<pre class="sh">pip install -r requirements.txt
+
+python3 -m pytest -q             <span class="c"># 184 assertions, every one with a threshold</span>
+python3 -m experiments.run_all   <span class="c"># regenerate every number on this page (~18 s)</span>
+./run_all.sh                     <span class="c"># both, non-zero exit on any regression</span>
+
+./provitc.py ir bench/bitmix.mc -O   <span class="c"># compile and optimise</span>
+./provitc.py library                 <span class="c"># what the verifier has admitted</span>
+./provitc.py verify                  <span class="c"># re-check every rule's declared verdict</span></pre>
+    <p class="prose" style="color:var(--muted); font-size:.93rem">A passing test here asserts a numeric threshold or an exact verdict. &ldquo;The script ran without crashing&rdquo; is the failure mode this project exists to argue against, so it is not allowed to count as a pass.</p>
+  </section>
+
+  <footer>
+    <span>ProveIt-C &middot; working title, not yet checked for collisions &middot; MiniC v0.1 semantics frozen</span>
+    <span>Positioned against Alive2 (Lopes et&nbsp;al., PLDI&nbsp;'21), Souper, LLM-Vectorizer (Taneja et&nbsp;al., CGO&nbsp;'25), LLM-VeriOpt (Fang et&nbsp;al., CGO&nbsp;'26) and CoV (Kwon et&nbsp;al., CGO&nbsp;'26).</span>
+  </footer>
+</div>

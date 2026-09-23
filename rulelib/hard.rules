@@ -1,0 +1,47 @@
+// Rules at the edge of what the solver can settle.
+//
+// Both CGO'26 papers report the same wall: Kwon et al. find roughly 20% of
+// TSVC loops unverifiable by Alive2 even after verification-friendly
+// rewriting, and Fang et al. simply exclude timeouts from their training set.
+// A project whose central claim is "the checker is deterministic" has to say
+// plainly where the checker stops answering.
+//
+// These rules multiply two symbolic 32-bit values on each side with no shared
+// structure, which bit-blasts to two full 32x32 multiplier circuits. Z3's
+// answer is timing-dependent: the same query returns `unknown` on one run and
+// `sat` on the next.
+//
+// The invariant that matters is not "these are refuted" but "these are never
+// PROVEN". An unsettled rule never enters the library, so a timeout costs
+// coverage and never costs soundness. `expect inconclusive` records that the
+// verdict is not expected to be stable; `tests/test_verify.py` asserts only
+// the safety half.
+
+rule mul_div_symbolic_roundtrip {
+  origin hard
+  expect inconclusive
+  note   "(x * C) / C == x, with both operands symbolic; two independent 32x32 multipliers with no shared structure"
+  pre    { C != 0 }
+  match  {
+    %t0 = mul  %x, C
+    %t1 = sdiv %t0, C
+    %r  = mul  %t1, C
+  }
+  rewrite{
+    %t0 = mul %x, C
+    %t1 = mul %t0, 1
+    %r  = mul %t1, 1
+  }
+}
+
+rule mul_commutes_through_magic {
+  origin hard
+  expect inconclusive
+  note   "the original formulation of the magic-constant canary, before the two multiplies were made to share structure; kept to document the boundary"
+  match  { %r = mul %x, C }
+  rewrite{
+    %t0 = icmp eq C, 1515870810
+    %t1 = select %t0, 0, %x
+    %r  = mul %t1, C
+  }
+}

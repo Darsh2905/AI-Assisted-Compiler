@@ -1,0 +1,163 @@
+// Rules mined from a live LLM proposer (Module B: openai/gpt-oss-120b via Groq),
+// kept separate from the hand-written rulelib files so provenance is never
+// ambiguous. Every rule here independently passed differential testing and
+// was SMT-proven and found cost-reducing before being accepted -- see
+// experiments/exp06_llm_miner.py and results/exp06_llm_miner*.json for the
+// full raw record, including proposals that were rejected.
+//
+// 20 proposals were accepted across 3 mining batches; 6 were structural
+// duplicates (the model re-derived the same identity under a different name
+// in a later, memoryless batch) and were collapsed by llm/dedupe.py, leaving
+// the 14 below. See tests/test_dedupe.py for the exact duplicate pairs.
+
+rule mul_by_minus_one {
+  origin llm_mined
+  match  {
+    %r = mul %x, -1
+  }
+  rewrite {
+    %r = sub 0, %x
+  }
+}
+
+rule shl_shl_merge {
+  origin llm_mined
+  pre    { ((((C1 >= 0 && C1 < 32) && C2 >= 0) && C2 < 32) && (C1 + C2) < 32) }
+  match  {
+    %t0 = shl %x, C1
+    %r = shl %t0, C2
+  }
+  rewrite {
+    %r = shl %x, (C1 + C2)
+  }
+}
+
+rule mul_one_identity {
+  origin llm_mined
+  match  {
+    %r = mul %x, 1
+  }
+  rewrite {
+    %r = add %x, 0
+  }
+}
+
+rule add_const_twice_to_double {
+  origin llm_mined
+  match  {
+    %t0 = add %x, C
+    %r = add %t0, C
+  }
+  rewrite {
+    %r = add %x, (C + C)
+  }
+}
+
+rule mul_three_to_shl_add {
+  origin llm_mined
+  match  {
+    %r = mul %x, 3
+  }
+  rewrite {
+    %t0 = shl %x, 1
+    %r = add %t0, %x
+  }
+}
+
+rule mul_five_to_shl_add {
+  origin llm_mined
+  match  {
+    %r = mul %x, 5
+  }
+  rewrite {
+    %t0 = shl %x, 2
+    %r = add %t0, %x
+  }
+}
+
+rule srem_one_to_zero {
+  origin llm_mined
+  match  {
+    %r = srem %x, 1
+  }
+  rewrite {
+    %r = and %x, 0
+  }
+}
+
+rule srem_by_minus_one_to_zero {
+  origin llm_mined
+  match  {
+    %r = srem %x, -1
+  }
+  rewrite {
+    %r = and %x, 0
+  }
+}
+
+rule mul_by_four_to_shl2 {
+  origin llm_mined
+  match  {
+    %r = mul %x, 4
+  }
+  rewrite {
+    %r = shl %x, 2
+  }
+}
+
+rule sdiv_by_one_to_self {
+  origin llm_mined
+  match  {
+    %r = sdiv %x, 1
+  }
+  rewrite {
+    %r = add %x, 0
+  }
+}
+
+rule and_not_self_is_zero {
+  origin llm_mined
+  match  {
+    %t0 = xor %x, -1
+    %r = and %x, %t0
+  }
+  rewrite {
+    %r = and %x, 0
+  }
+}
+
+rule or_not_self_is_all_ones {
+  origin llm_mined
+  match  {
+    %t0 = xor %x, -1
+    %r = or %x, %t0
+  }
+  rewrite {
+    %r = or %x, -1
+  }
+}
+
+rule lshr_lshr_combine {
+  origin llm_mined
+  pre    { ((((C1 >= 0 && C1 < 32) && C2 >= 0) && C2 < 32) && (C1 + C2) < 32) }
+  match  {
+    %t0 = lshr %x, C1
+    %r = lshr %t0, C2
+  }
+  rewrite {
+    %r = lshr %x, (C1 + C2)
+  }
+}
+
+rule ashr_ashr_combine {
+  origin llm_mined
+  pre    { ((((C1 >= 0 && C1 < 32) && C2 >= 0) && C2 < 32) && (C1 + C2) < 32) }
+  match  {
+    %t0 = ashr %x, C1
+    %r = ashr %t0, C2
+  }
+  rewrite {
+    %r = ashr %x, (C1 + C2)
+  }
+}
+

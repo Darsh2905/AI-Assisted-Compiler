@@ -1,0 +1,208 @@
+// Hand-written peephole rules that should be PROVEN.
+//
+// These are the control group. Before any LLM-proposed rule is trusted, the
+// verifier has to prove rules a human already knows are correct, and reject
+// rules a human already knows are wrong (see adversarial.rules). This file is
+// the first half of the week 7-9 exit criterion in the project plan.
+//
+// `expect proven` is asserted by tests/test_smt.py, so a regression in the
+// encoder fails the build rather than quietly downgrading a proof.
+
+rule or_zero_identity {
+  origin textbook
+  expect proven
+  note   "x | 0 == x"
+  match  { %r = or %x, 0 }
+  rewrite{ %r = add %x, 0 }
+}
+
+rule add_self_to_shl1 {
+  origin textbook
+  expect proven
+  note   "x + x == x << 1, including on wraparound"
+  match  { %r = add %x, %x }
+  rewrite{ %r = shl %x, 1 }
+}
+
+rule mul_pow2_to_shl {
+  origin textbook
+  expect proven
+  note   "the canonical strength reduction; log2(C) is in 0..31 so the shift never traps"
+  pre    { is_pow2(C) }
+  match  { %r = mul %x, C }
+  rewrite{ %r = shl %x, log2(C) }
+}
+
+rule mul_three_to_shift_add {
+  origin textbook
+  expect proven
+  note   "3x == 2x + x, and both sides wrap identically"
+  match  { %r = mul %x, 3 }
+  rewrite{
+    %t0 = shl %x, 1
+    %r  = add %t0, %x
+  }
+}
+
+rule mul_neg_one_to_neg {
+  origin textbook
+  expect proven
+  note   "x * -1 == 0 - x; holds at INT_MIN because both sides wrap to INT_MIN"
+  match  { %r = mul %x, -1 }
+  rewrite{ %r = sub 0, %x }
+}
+
+rule sub_self_to_zero {
+  origin textbook
+  expect proven
+  note   "x - x == 0"
+  match  { %r = sub %x, %x }
+  rewrite{ %r = and %x, 0 }
+}
+
+rule xor_self_to_zero {
+  origin textbook
+  expect proven
+  note   "x ^ x == 0"
+  match  { %r = xor %x, %x }
+  rewrite{ %r = and %x, 0 }
+}
+
+rule double_negation {
+  origin textbook
+  expect proven
+  note   "-(-x) == x in two's complement, INT_MIN included"
+  match  {
+    %t0 = sub 0, %x
+    %r  = sub 0, %t0
+  }
+  rewrite{ %r = add %x, 0 }
+}
+
+rule and_not_self_zero {
+  origin textbook
+  expect proven
+  note   "x & ~x == 0"
+  match  {
+    %t0 = xor %x, -1
+    %r  = and %x, %t0
+  }
+  rewrite{ %r = and %x, 0 }
+}
+
+rule or_not_self_ones {
+  origin textbook
+  expect proven
+  note   "x | ~x == -1"
+  match  {
+    %t0 = xor %x, -1
+    %r  = or %x, %t0
+  }
+  rewrite{ %r = or %x, -1 }
+}
+
+rule demorgan_not_and {
+  origin textbook
+  expect proven
+  note   "~(x & y) == ~x | ~y"
+  match  {
+    %t0 = and %x, %y
+    %r  = xor %t0, -1
+  }
+  rewrite{
+    %t0 = xor %x, -1
+    %t1 = xor %y, -1
+    %r  = or %t0, %t1
+  }
+}
+
+rule add_split_or_and {
+  origin textbook
+  expect proven
+  note   "x + y == (x | y) + (x & y); the carry-free decomposition of addition"
+  match  { %r = add %x, %y }
+  rewrite{
+    %t0 = or  %x, %y
+    %t1 = and %x, %y
+    %r  = add %t0, %t1
+  }
+}
+
+rule sub_or_to_and {
+  origin textbook
+  expect proven
+  note   "(x + y) - (x | y) == x & y; a corollary of add_split_or_and that a purely syntactic matcher would not find"
+  match  {
+    %t0 = add %x, %y
+    %t1 = or  %x, %y
+    %r  = sub %t0, %t1
+  }
+  rewrite{ %r = and %x, %y }
+}
+
+rule xor_and_to_or {
+  origin textbook
+  expect proven
+  note   "(x ^ y) + (x & y) == x | y"
+  match  {
+    %t0 = xor %x, %y
+    %t1 = and %x, %y
+    %r  = add %t0, %t1
+  }
+  rewrite{ %r = or %x, %y }
+}
+
+rule shl_shl_combine {
+  origin textbook
+  expect proven
+  note   "shifts compose only while the total stays in range; without the third conjunct the two sides disagree on trapping"
+  pre    { ult(C1, 32) && ult(C2, 32) && ult(C1 + C2, 32) }
+  match  {
+    %t0 = shl %x, C1
+    %r  = shl %t0, C2
+  }
+  rewrite{ %r = shl %x, C1 + C2 }
+}
+
+rule sdiv_by_one {
+  origin textbook
+  expect proven
+  note   "x / 1 == x, and neither side traps"
+  match  { %r = sdiv %x, 1 }
+  rewrite{ %r = add %x, 0 }
+}
+
+rule srem_by_one {
+  origin textbook
+  expect proven
+  note   "x % 1 == 0"
+  match  { %r = srem %x, 1 }
+  rewrite{ %r = and %x, 0 }
+}
+
+rule select_same_arms {
+  origin textbook
+  expect proven
+  note   "select c, x, x == x for either value of c"
+  match  { %r = select %c, %x, %x }
+  rewrite{ %r = add %x, 0 }
+}
+
+rule icmp_sgt_swap {
+  origin textbook
+  expect proven
+  note   "x > y iff y < x"
+  match  { %r = icmp sgt %x, %y }
+  rewrite{ %r = icmp slt %y, %x }
+}
+
+rule icmp_not_sgt_to_sle {
+  origin textbook
+  expect proven
+  note   "!(x > y) iff x <= y; signed comparison is total, so the negation is exact"
+  match  {
+    %t0 = icmp sgt %x, %y
+    %r  = not %t0
+  }
+  rewrite{ %r = icmp sle %x, %y }
+}

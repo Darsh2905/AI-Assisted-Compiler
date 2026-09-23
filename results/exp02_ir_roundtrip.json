@@ -1,0 +1,66 @@
+{
+  "bench": {
+    "detail": [
+      [
+        "bitmix.mc",
+        99,
+        "ok"
+      ],
+      [
+        "gcd.mc",
+        58,
+        "ok"
+      ],
+      [
+        "matmul.mc",
+        225,
+        "ok"
+      ],
+      [
+        "numeric.mc",
+        181,
+        "ok"
+      ],
+      [
+        "sort.mc",
+        209,
+        "ok"
+      ],
+      [
+        "stencil.mc",
+        261,
+        "ok"
+      ]
+    ],
+    "passed": 6,
+    "programs": 6
+  },
+  "random": {
+    "failures": 0,
+    "instructions": 14340,
+    "modules": 500,
+    "opcodes": [
+      "add",
+      "alloca",
+      "aload",
+      "and",
+      "ashr",
+      "astore",
+      "br",
+      "call",
+      "cbr",
+      "const",
+      "icmp",
+      "lshr",
+      "mul",
+      "or",
+      "phi",
+      "ret",
+      "sdiv",
+      "shl",
+      "srem",
+      "sub",
+      "xor"
+    ]
+  }
+}

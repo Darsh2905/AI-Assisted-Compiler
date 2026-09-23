@@ -1,0 +1,134 @@
+// Rules that are wrong on purpose. Every one must be REFUTED.
+//
+// A verifier that only ever says "proven" is indistinguishable from one that
+// always says "proven". This file is the other half of the week 7-9 exit
+// criterion: the checker has to reject things, and it has to reject them for
+// the right reason, which is why each rule records the counterexample class it
+// is meant to expose.
+//
+// Most of these are plausible-looking transformations that a proposer — human
+// or model — actually emits. `shl_mask_trap_erasure` is the one to read first:
+// it is value-correct on every input that does not trap, and is unsound only
+// because it deletes a trap. A checker that compared values alone would pass it.
+
+rule sdiv2_to_ashr {
+  origin adversarial
+  expect refuted
+  note   "the classic: sdiv truncates toward zero, ashr rounds toward -inf, so they disagree on every negative odd value"
+  match  { %r = sdiv %x, 2 }
+  rewrite{ %r = ashr %x, 1 }
+}
+
+rule srem_pow2_to_mask {
+  origin adversarial
+  expect refuted
+  note   "x % 2^k == x & (2^k - 1) only for non-negative x; MiniC srem takes the sign of the dividend"
+  pre    { is_pow2(C) }
+  match  { %r = srem %x, C }
+  rewrite{ %r = and %x, C - 1 }
+}
+
+rule mul_div_cancel {
+  origin adversarial
+  expect refuted
+  note   "(x * C) / C == x fails whenever the multiply wraps"
+  pre    { C != 0 }
+  match  {
+    %t0 = mul %x, C
+    %r  = sdiv %t0, C
+  }
+  rewrite{ %r = add %x, 0 }
+}
+
+rule avg_via_add_shift {
+  origin adversarial
+  expect refuted
+  note   "the overflow-free average is a different function from (x+y)>>1, not an optimisation of it"
+  match  {
+    %t0 = add %x, %y
+    %r  = ashr %t0, 1
+  }
+  rewrite{
+    %t0 = and  %x, %y
+    %t1 = xor  %x, %y
+    %t2 = ashr %t1, 1
+    %r  = add  %t0, %t2
+  }
+}
+
+rule shift_roundtrip {
+  origin adversarial
+  expect refuted
+  note   "(x << C) >> C == x only when the top C+1 bits of x already agree"
+  pre    { ult(C, 32) }
+  match  {
+    %t0 = shl  %x, C
+    %r  = ashr %t0, C
+  }
+  rewrite{ %r = add %x, 0 }
+}
+
+rule cmp_via_subtraction {
+  origin adversarial
+  expect refuted
+  note   "x < y is not (x - y) < 0; the subtraction can wrap"
+  match  { %r = icmp slt %x, %y }
+  rewrite{
+    %t0 = sub %x, %y
+    %r  = icmp slt %t0, 0
+  }
+}
+
+rule shl_mask_trap_erasure {
+  origin adversarial
+  expect refuted
+  note   "masking the shift amount to 5 bits is what the hardware does, and it is value-correct on every non-trapping input -- it is unsound only because it erases a trap"
+  match  { %r = shl %x, %y }
+  rewrite{
+    %t0 = and %y, 31
+    %r  = shl %x, %t0
+  }
+}
+
+rule or_is_add {
+  origin adversarial
+  expect refuted
+  note   "x | y == x + y only when the operands share no set bit"
+  match  { %r = or %x, %y }
+  rewrite{ %r = add %x, %y }
+}
+
+rule xor_and_sum_is_add {
+  origin adversarial
+  expect refuted
+  note   "(x ^ y) + (x & y) is x | y, not x + y; one carry term short"
+  match  {
+    %t0 = xor %x, %y
+    %t1 = and %x, %y
+    %r  = add %t0, %t1
+  }
+  rewrite{ %r = add %x, %y }
+}
+
+rule double_not_is_neg {
+  origin adversarial
+  expect refuted
+  note   "~~x == x, not -x; confusing bitwise and arithmetic negation"
+  match  {
+    %t0 = xor %x, -1
+    %r  = xor %t0, -1
+  }
+  rewrite{ %r = sub 0, %x }
+}
+
+rule sdiv_neg_pow2_to_shift {
+  origin adversarial
+  expect refuted
+  note   "x / -2^k == -(x >> k) inherits the rounding bug of sdiv2_to_ashr"
+  pre    { is_neg_pow2(C) }
+  match  { %r = sdiv %x, C }
+  rewrite{
+    %t0 = ashr %x, log2(-C)
+    %r  = sub 0, %t0
+  }
+}

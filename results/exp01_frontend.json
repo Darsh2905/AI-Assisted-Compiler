@@ -1,0 +1,110 @@
+{
+  "grammar": {
+    "conflict_detail": [],
+    "ll1_conflicts": 0,
+    "nonterminals": 58,
+    "productions": 109,
+    "table_cells": 430
+  },
+  "mutation": {
+    "by_operator": {
+      "delete_decl": {
+        "detected": 14,
+        "mutants": 14,
+        "on_line": 4,
+        "silent": 0
+      },
+      "drop_argument": {
+        "detected": 18,
+        "mutants": 18,
+        "on_line": 7,
+        "silent": 0
+      },
+      "drop_return": {
+        "detected": 13,
+        "mutants": 17,
+        "on_line": 0,
+        "silent": 4
+      },
+      "int_condition": {
+        "detected": 4,
+        "mutants": 4,
+        "on_line": 4,
+        "silent": 0
+      },
+      "swap_type": {
+        "detected": 15,
+        "mutants": 15,
+        "on_line": 15,
+        "silent": 0
+      },
+      "typo_identifier": {
+        "detected": 12,
+        "mutants": 12,
+        "on_line": 12,
+        "silent": 0
+      }
+    },
+    "codes": {
+      "E0101": 66,
+      "E0103": 8,
+      "E0201": 26,
+      "E0202": 16,
+      "E0203": 4,
+      "E0301": 19,
+      "E0401": 13,
+      "E0402": 8,
+      "E0501": 2
+    },
+    "detected": 76,
+    "fault_line_reported": 42,
+    "grounded_diagnostics": 75,
+    "silent": 4,
+    "total": 80,
+    "ungrounded_diagnostics": 87
+  },
+  "programs": [
+    {
+      "functions": 5,
+      "ir_instructions": 99,
+      "lines": 32,
+      "ok": true,
+      "program": "bitmix.mc"
+    },
+    {
+      "functions": 3,
+      "ir_instructions": 58,
+      "lines": 24,
+      "ok": true,
+      "program": "gcd.mc"
+    },
+    {
+      "functions": 3,
+      "ir_instructions": 225,
+      "lines": 33,
+      "ok": true,
+      "program": "matmul.mc"
+    },
+    {
+      "functions": 5,
+      "ir_instructions": 181,
+      "lines": 55,
+      "ok": true,
+      "program": "numeric.mc"
+    },
+    {
+      "functions": 4,
+      "ir_instructions": 209,
+      "lines": 48,
+      "ok": true,
+      "program": "sort.mc"
+    },
+    {
+      "functions": 4,
+      "ir_instructions": 261,
+      "lines": 37,
+      "ok": true,
+      "program": "stencil.mc"
+    }
+  ]
+}

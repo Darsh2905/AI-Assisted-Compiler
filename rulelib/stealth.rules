@@ -1,0 +1,66 @@
+// Wrong rules built to survive differential testing.
+//
+// These exist to make RQ1 measurable on a corpus we control. Each one is
+// refuted by the solver, but its counterexample set is a vanishing fraction of
+// the input space, so a tester only finds it if the sampler happens to draw
+// the right value. `experiments/exp04_difftest_vs_smt.py` runs each of these
+// under three budgets and two sampling strategies and reports how often the
+// tester catches what the solver catches every time.
+//
+// Two flavours, deliberately:
+//
+//   * `int_min_only`  -- wrong on exactly one of 2^32 inputs, and that input is
+//     a value any competent test-designer thinks of. Boundary seeding finds
+//     these; uniform random sampling does not.
+//   * `canary`        -- wrong only for one arbitrary constant nobody would
+//     think to enumerate. Neither sampling strategy finds it. This is the
+//     "seed known-wrong rules as canaries" mitigation from the project plan's
+//     risk table, and it is the case that shows boundary seeding is a
+//     heuristic, not a method.
+
+rule lt_neg_self {
+  origin int_min_only
+  expect refuted
+  note   "x < -x is equivalent to x < 0 everywhere except x == INT_MIN, where -x is INT_MIN again"
+  match  {
+    %t0 = sub 0, %x
+    %r  = icmp slt %x, %t0
+  }
+  rewrite{ %r = icmp slt %x, 0 }
+}
+
+rule abs_is_nonnegative {
+  origin int_min_only
+  expect refuted
+  note   "the branchless abs idiom (x ^ (x>>31)) - (x>>31) returns INT_MIN for INT_MIN, so 'abs(x) >= 0' is false there"
+  match  {
+    %t0 = ashr %x, 31
+    %t1 = xor  %x, %t0
+    %t2 = sub  %t1, %t0
+    %r  = icmp sge %t2, 0
+  }
+  rewrite{ %r = icmp sge %x, %x }
+}
+
+rule succ_greater_than_self {
+  origin int_min_only
+  expect refuted
+  note   "x + 1 > x holds for every int except INT_MAX, where the increment wraps"
+  match  {
+    %t0 = add %x, 1
+    %r  = icmp sgt %t0, %x
+  }
+  rewrite{ %r = icmp sge %x, %x }
+}
+
+rule mul_identity_with_magic_constant {
+  origin canary
+  expect refuted
+  note   "identity for every constant except 0x5A5A5A5A, modelling a proposer that special-cased one hallucinated value; no boundary-value list contains it"
+  match  { %r = mul %x, C }
+  rewrite{
+    %t0 = icmp eq C, 1515870810
+    %t1 = mul %x, C
+    %r  = select %t0, 0, %t1
+  }
+}

@@ -1,12 +1,12 @@
 {
-  "generated_seconds": 17.8,
+  "generated_seconds": 17.4,
   "headline": {
     "LL(1) conflicts in the MiniC grammar": 0,
     "benchmark programs compiled": 6,
     "compilation is byte-identical across runs": true,
     "counterexamples reproduced by the reference interpreter": "17/17",
     "library rules that are cost-reducing": "12 of 20",
-    "median solve time": "1.7 ms",
+    "median solve time": "1.6 ms",
     "mutants detected": "76/80",
     "proven": 20,
     "proven rules wrongly refuted by testing": 0,

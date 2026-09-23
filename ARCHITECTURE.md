@@ -1,6 +1,6 @@
 # Architecture
 
-This document explains what ProveIt-C is, why it's shaped the way it is, and how its pieces fit together. For measured results and current build status, see [README.md](README.md). For the research framing and literature positioning, see [paper/paper.pdf](paper/paper.pdf).
+This document explains what ProveIt-C is, why it's shaped the way it is, and how its pieces fit together. For measured results and current build status, see [README.md](README.md). For the research framing and literature positioning, see [paper/paper.pdf](paper/paper.pdf). For how the code *inside* each piece actually works — function by function, in plain language — see [docs/](docs/README.md). For how to run and demo the project, see [PRESENTING.md](PRESENTING.md).
 
 ## The problem in one sentence
 
@@ -52,23 +52,24 @@ Two costs show up in every published "LLM + verifier" compiler system, and this 
 ## Repository map
 
 ```
-spec/         MiniC grammar (machine-checked LL(1)) and frozen formal semantics
-frontend/     Lexer → parser → AST → semantic analysis → structured diagnostics
-ir/           The intermediate representation: types, printer, parser, IR generation
-passes/       Constant folding, trap-safe dead-code elimination, the rule applier + cost model
-verify/       The verification core: rule DSL, SMT encoder, reference interpreter, differential tester
-llm/          Module B: the live proposer — Groq API client, DSL-teaching prompt,
-              propose→parse→test→verify loop, structural deduplication
+spec/         MiniC grammar (machine-checked LL(1)) and frozen formal semantics       → docs/01, docs/02
+frontend/     Lexer → parser → AST → semantic analysis → structured diagnostics       → docs/01, docs/02
+ir/           The intermediate representation: types, printer, parser, IR generation  → docs/03
+passes/       Constant folding, trap-safe DCE, the rule applier + cost model          → docs/04
+verify/       Rule DSL, SMT encoder, reference interpreter, differential tester       → docs/05, docs/06, docs/07
+llm/          Module B: the live proposer — Groq client, prompt, miner, dedup         → docs/08
 rulelib/      textbook (hand-written, proven) · adversarial (deliberately wrong, for testing
               the checker) · stealth (wrong-but-hard-to-catch) · hard (solver capability
-              boundary) · mined (Module B's live output, kept separate for provenance)
+              boundary) · mined (Module B's live output, kept separate for provenance) → docs/05, docs/08
 bench/        Sample MiniC programs used as the benchmark suite
-demo/         Terminal walkthrough script + its two sample programs
-experiments/  One script per measured result; regenerates every number in the paper
-tests/        Pytest suite — every test asserts a concrete threshold, not just "didn't crash"
-web/          Local playground (server.py + app.html) and the published static status page
+demo/         Terminal walkthrough script + its two sample programs                    → PRESENTING.md
+experiments/  One script per measured result; regenerates every number in the paper   → docs/09
+tests/        Pytest suite — every test asserts a concrete threshold, not "didn't crash" → docs/09
+web/          Local playground (server.py + app.html) and the published status page   → docs/10
 paper/        The IEEE-format research paper (paper.tex / paper.pdf)
 ```
+
+Every arrow points into [docs/](docs/README.md), which explains the logic inside each of these directories function by function.
 
 ## Data flow: compiling one program
 

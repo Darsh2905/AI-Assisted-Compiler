@@ -12,7 +12,7 @@
         "origin": "adversarial",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 4.44,
+        "solve_ms": 3.98,
         "status": "REFUTED"
       },
       {
@@ -27,7 +27,7 @@
         "origin": "adversarial",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 87.19,
+        "solve_ms": 79.59,
         "status": "REFUTED"
       },
       {
@@ -42,7 +42,7 @@
         "origin": "adversarial",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 79.29,
+        "solve_ms": 74.9,
         "status": "REFUTED"
       },
       {
@@ -57,7 +57,7 @@
         "origin": "adversarial",
         "profitable": false,
         "rewrite_cost": 4,
-        "solve_ms": 5.71,
+        "solve_ms": 5.76,
         "status": "REFUTED"
       },
       {
@@ -72,7 +72,7 @@
         "origin": "adversarial",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 2.92,
+        "solve_ms": 3.05,
         "status": "REFUTED"
       },
       {
@@ -87,7 +87,7 @@
         "origin": "adversarial",
         "profitable": false,
         "rewrite_cost": 2,
-        "solve_ms": 2.05,
+        "solve_ms": 1.99,
         "status": "REFUTED"
       },
       {
@@ -102,7 +102,7 @@
         "origin": "adversarial",
         "profitable": false,
         "rewrite_cost": 2,
-        "solve_ms": 1.67,
+        "solve_ms": 1.6,
         "status": "REFUTED"
       },
       {
@@ -117,7 +117,7 @@
         "origin": "adversarial",
         "profitable": false,
         "rewrite_cost": 1,
-        "solve_ms": 1.6,
+        "solve_ms": 1.55,
         "status": "REFUTED"
       },
       {
@@ -132,7 +132,7 @@
         "origin": "adversarial",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 2.04,
+        "solve_ms": 2.06,
         "status": "REFUTED"
       },
       {
@@ -146,7 +146,7 @@
         "origin": "adversarial",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 1.26,
+        "solve_ms": 1.42,
         "status": "REFUTED"
       },
       {
@@ -161,7 +161,7 @@
         "origin": "adversarial",
         "profitable": true,
         "rewrite_cost": 2,
-        "solve_ms": 25.21,
+        "solve_ms": 25.11,
         "status": "REFUTED"
       }
     ],
@@ -178,7 +178,7 @@
         "origin": "hard",
         "profitable": true,
         "rewrite_cost": 9,
-        "solve_ms": 122.34,
+        "solve_ms": 123.59,
         "status": "REFUTED"
       },
       {
@@ -193,7 +193,7 @@
         "origin": "hard",
         "profitable": false,
         "rewrite_cost": 5,
-        "solve_ms": 13.46,
+        "solve_ms": 14.01,
         "status": "REFUTED"
       }
     ],
@@ -209,7 +209,7 @@
         "origin": "int_min_only",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 2.2,
+        "solve_ms": 2.27,
         "status": "REFUTED"
       },
       {
@@ -223,7 +223,7 @@
         "origin": "int_min_only",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 0.96,
+        "solve_ms": 0.94,
         "status": "REFUTED"
       },
       {
@@ -237,7 +237,7 @@
         "origin": "int_min_only",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 1.79,
+        "solve_ms": 1.65,
         "status": "REFUTED"
       },
       {
@@ -252,7 +252,7 @@
         "origin": "canary",
         "profitable": false,
         "rewrite_cost": 5,
-        "solve_ms": 7.47,
+        "solve_ms": 7.75,
         "status": "REFUTED"
       }
     ],
@@ -266,7 +266,7 @@
         "origin": "textbook",
         "profitable": false,
         "rewrite_cost": 1,
-        "solve_ms": 0.44,
+        "solve_ms": 0.43,
         "status": "PROVEN"
       },
       {
@@ -278,7 +278,7 @@
         "origin": "textbook",
         "profitable": false,
         "rewrite_cost": 1,
-        "solve_ms": 0.66,
+        "solve_ms": 0.63,
         "status": "PROVEN"
       },
       {
@@ -290,7 +290,7 @@
         "origin": "textbook",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 46.55,
+        "solve_ms": 45.61,
         "status": "PROVEN"
       },
       {
@@ -302,7 +302,7 @@
         "origin": "textbook",
         "profitable": true,
         "rewrite_cost": 2,
-        "solve_ms": 0.82,
+        "solve_ms": 0.8,
         "status": "PROVEN"
       },
       {
@@ -314,7 +314,7 @@
         "origin": "textbook",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 0.34,
+        "solve_ms": 0.33,
         "status": "PROVEN"
       },
       {
@@ -350,7 +350,7 @@
         "origin": "textbook",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 0.39,
+        "solve_ms": 0.35,
         "status": "PROVEN"
       },
       {
@@ -362,7 +362,7 @@
         "origin": "textbook",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 0.39,
+        "solve_ms": 0.35,
         "status": "PROVEN"
       },
       {
@@ -374,7 +374,7 @@
         "origin": "textbook",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 0.38,
+        "solve_ms": 0.35,
         "status": "PROVEN"
       },
       {
@@ -386,7 +386,7 @@
         "origin": "textbook",
         "profitable": false,
         "rewrite_cost": 3,
-        "solve_ms": 0.47,
+        "solve_ms": 0.43,
         "status": "PROVEN"
       },
       {
@@ -398,7 +398,7 @@
         "origin": "textbook",
         "profitable": false,
         "rewrite_cost": 3,
-        "solve_ms": 5.24,
+        "solve_ms": 5.21,
         "status": "PROVEN"
       },
       {
@@ -410,7 +410,7 @@
         "origin": "textbook",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 8.73,
+        "solve_ms": 8.6,
         "status": "PROVEN"
       },
       {
@@ -422,7 +422,7 @@
         "origin": "textbook",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 2.76,
+        "solve_ms": 2.77,
         "status": "PROVEN"
       },
       {
@@ -434,7 +434,7 @@
         "origin": "textbook",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 3.7,
+        "solve_ms": 3.81,
         "status": "PROVEN"
       },
       {
@@ -446,7 +446,7 @@
         "origin": "textbook",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 0.43,
+        "solve_ms": 0.37,
         "status": "PROVEN"
       },
       {
@@ -458,7 +458,7 @@
         "origin": "textbook",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 0.36,
+        "solve_ms": 0.33,
         "status": "PROVEN"
       },
       {
@@ -470,7 +470,7 @@
         "origin": "textbook",
         "profitable": false,
         "rewrite_cost": 1,
-        "solve_ms": 0.35,
+        "solve_ms": 0.34,
         "status": "PROVEN"
       },
       {
@@ -482,7 +482,7 @@
         "origin": "textbook",
         "profitable": false,
         "rewrite_cost": 1,
-        "solve_ms": 0.33,
+        "solve_ms": 0.32,
         "status": "PROVEN"
       },
       {
@@ -494,7 +494,7 @@
         "origin": "textbook",
         "profitable": true,
         "rewrite_cost": 1,
-        "solve_ms": 0.37,
+        "solve_ms": 0.36,
         "status": "PROVEN"
       }
     ]
@@ -506,10 +506,10 @@
     "produced": 17
   },
   "solve_ms": {
-    "max": 122.34316702233627,
-    "median": 1.672917016549036,
-    "min": 0.31250002211891115,
-    "total": 434.94891515001655
+    "max": 123.59458301216364,
+    "median": 1.602709002327174,
+    "min": 0.30612500268034637,
+    "total": 423.22816810337827
   },
   "status_counts": {
     "PROVEN": 20,

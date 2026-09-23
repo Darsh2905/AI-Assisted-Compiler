@@ -20,9 +20,10 @@ no inference, no network, no sampling temperature in the build path.
 
 **Other documents in this repo:** [ARCHITECTURE.md](ARCHITECTURE.md) explains
 the whole project and how its pieces fit together, with diagrams.
-[PRESENTING.md](PRESENTING.md) is a step-by-step guide for actually running
-and demoing it. [paper/paper.pdf](paper/paper.pdf) is the full research
-writeup.
+[docs/](docs/README.md) has one file per subsystem explaining how the code
+inside it actually works, in plain language. [PRESENTING.md](PRESENTING.md)
+is a step-by-step guide for actually running and demoing it.
+[paper/paper.pdf](paper/paper.pdf) is the full research writeup.
 
 ```bash
 pip install -r requirements.txt
